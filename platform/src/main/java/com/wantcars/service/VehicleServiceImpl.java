@@ -1,63 +1,37 @@
 package com.wantcars.service;
 
-import com.wantcars.dao.VehicleManagerImpl;
+import com.wantcars.dao.VehicleManager;
 import com.wantcars.entity.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class VehicleServiceImpl implements VehicleService {
 
-    List<Vehicle> vehicles;
-    VehicleFilterSelected parameter;
-    int pageCount;
-    VehicleManagerImpl vehicleManager;
+    private VehicleFilterSelected parameter;
+    private int pageCount;
+    @Autowired
+    private VehicleManager vehicleManager;
 
-    public VehicleServiceImpl(){
-        this.vehicleManager = new VehicleManagerImpl();
-    }
+    public List<Vehicle> Query(VehicleFilterSelected parameter) {
 
-    public void Query(VehicleFilterSelected parameter) {
-
-        this.parameter = parameter;
         try {
-            vehicleManager.Query(parameter);
+            return vehicleManager.Query(parameter);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        return null;
     }
 
+    @Deprecated
     public List<List<ImageIcon>> getImages() {
         List<List<ImageIcon>> res = new ArrayList<>();
-        ImageIcon noIMG;
-        try {
-            noIMG = new ImageIcon(ImageIO.read( new File("/Users/aaron/NeuHomeWork5100/INFO5100-final-project-groupA/src/entity/noImage.jpg")));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return res;
-        }
-
-        for (Vehicle v : vehicles) {
-            List<ImageIcon> list = new ArrayList<>();
-            for (String link : v.getImages()) {
-                ImageIcon icon;
-                try {
-                    URL url = new URL(link);
-                    icon = new ImageIcon(ImageIO.read(url));
-                } catch (IOException e) {
-                    icon = noIMG;
-                }
-                list.add(icon);
-            }
-            res.add(new ArrayList<>(list));
-        }
 
         return res;
     }
@@ -71,7 +45,7 @@ public class VehicleServiceImpl implements VehicleService {
         return vehicleManager.getVehicles();
     }
 
-    public int getPageCount(){
+    public int getPageCount() {
         return vehicleManager.getPageCount();
     }
 

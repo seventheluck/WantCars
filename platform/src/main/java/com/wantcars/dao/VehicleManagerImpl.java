@@ -1,20 +1,22 @@
 package com.wantcars.dao;
 
 import com.wantcars.entity.*;
+import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Service
 public class VehicleManagerImpl implements VehicleManager {
 
-    Connection conn;
-    Statement stmt;
-    String dealerID;
-    int pageSize = 20;
+    private Connection conn;
+    private Statement stmt;
+    private String dealerID;
+    private int pageSize = 20;
 
-    int[][] yearChart = {
+    private int[][] yearChart = {
             {0, 2000},
             {2001, 2010},
             {2011, 2014},
@@ -24,7 +26,7 @@ public class VehicleManagerImpl implements VehicleManager {
             {2018, 2018},
     };
 
-    double[][] priceChart = {
+    private double[][] priceChart = {
             {0.0, 0.0},
             {0.1, 9999.9},
             {10000.0, 19999.9},
@@ -36,7 +38,7 @@ public class VehicleManagerImpl implements VehicleManager {
             {200000.0, Double.MAX_VALUE}
     };
 
-    int[][] milesChart = {
+    private int[][] milesChart = {
             {1, 4999},
             {5000, 9999},
             {10000, 19999},
@@ -136,9 +138,9 @@ public class VehicleManagerImpl implements VehicleManager {
         return res;
     }
 
-    public void Query(VehicleFilterSelected p) throws SQLException {
+    public List<Vehicle> Query(VehicleFilterSelected p) throws SQLException {
         vehicleFilterContent = new VehicleFilterContent();
-        vehicles = new ArrayList<>();
+        List<Vehicle> vehicles = new ArrayList<>();
         String cacheTableName = "cache" + p.getDealerID();
         String sql = generateConditionSQL(p);
         stmt = conn.createStatement();
@@ -267,6 +269,7 @@ public class VehicleManagerImpl implements VehicleManager {
         }
 
         stmt.executeUpdate("DROP TABLE IF EXISTS " + cacheTableName);
+        return vehicles;
     }
 
     public List<Vehicle> getVehicles() {
@@ -289,15 +292,17 @@ public class VehicleManagerImpl implements VehicleManager {
         } else {
             sql.append(p.getDealerID());
         }
-        if (p.getYears() != null) sql.append(yearSql(p.getYears()));
-        if (p.getBrand() != null) sql.append(brandSql(p.getBrand()));
-        if (p.getModel() != null) sql.append(modelSql(p.getModel()));
-        if (p.getIsNew() != null) sql.append(isNewSql(p.getIsNew()));
-        if (p.getPrice() != null) sql.append(priceSql(p.getPrice()));
-        if (p.getExteriorColor() != null) sql.append(exColorSql(p.getExteriorColor()));
-        if (p.getInteriorColor() != null) sql.append(inColorSql(p.getInteriorColor()));
-        if (p.getBodyType() != null) sql.append(typeSql(p.getBodyType()));
-        if (p.getMiles() != null) sql.append(milesSql(p.getMiles()));
+        if (p.getYears() != null && p.getYears().size() != 0) sql.append(yearSql(p.getYears()));
+        if (p.getBrand() != null && p.getBrand().size() != 0) sql.append(brandSql(p.getBrand()));
+        if (p.getModel() != null && p.getModel().size() != 0) sql.append(modelSql(p.getModel()));
+        if (p.getIsNew() != null && p.getIsNew().size() != 0) sql.append(isNewSql(p.getIsNew()));
+        if (p.getPrice() != null && p.getPrice().size() != 0) sql.append(priceSql(p.getPrice()));
+        if (p.getExteriorColor() != null && p.getExteriorColor().size() != 0)
+            sql.append(exColorSql(p.getExteriorColor()));
+        if (p.getInteriorColor() != null && p.getInteriorColor().size() != 0)
+            sql.append(inColorSql(p.getInteriorColor()));
+        if (p.getBodyType() != null && p.getBodyType().size() != 0) sql.append(typeSql(p.getBodyType()));
+        if (p.getMiles() != null && p.getMiles().size() != 0) sql.append(milesSql(p.getMiles()));
         System.out.println(sql);
 
         return sql.toString();
