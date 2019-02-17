@@ -41,4 +41,7 @@ public class VehicleController {
         List<Vehicle> result = vehicleService.Query(vehicleFilterSelected);
         return result;
     }
+
+
+
 }
