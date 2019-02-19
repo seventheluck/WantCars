@@ -5,15 +5,45 @@
 }
 /* car search field */
 .search-panel{
-    width:25%;
+    width:20%;
     height:100%;
     position: absolute;
     margin-left: 12.5%;
+    background-color: white;
 }
 
+.filters-block{
+    width: 100%;
+    height:100%;
+    list-style-type: none;
+    margin-left: 0%;
+    padding-left: 0%;
+}
 
+.filter-block{
+    width: 100%;
+    height: 30%;
+    margin-left: 5%;
+}
 
+.filter-title{
+    width: 100%;
+    height:20%;
+    margin-left: 0%;
+}
 
+.checkbox-items{
+    list-style-type: none;
+    width: 100%;
+    height: 90%;
+    overflow: scroll;
+    padding-left: 0%;
+}
+
+.checkbox-item{
+    width: 100%;
+    height: 20%;
+}
 
 /* car record field */
 .car-result{

@@ -1,0 +1,81 @@
+.main-panel{
+    width: 100%;
+    height: 250em;
+    background-color: #f2f2f2;
+    position: relative;
+}
+
+.search-panel{
+    width: 50%;
+    height: 5%;
+    margin-left: 25%;
+    position: relative;
+}
+
+.search-block{
+    width: 100%;
+    height: 10%;
+    position: relative;
+}
+
+.name{
+    width: 30%;
+    margin-top: 10%;
+    position: absolute;
+}
+.city-text{
+    width: 50%;
+    margin-left: 20%;
+    margin-top: 10%;
+    position: relative;
+}
+
+.name-text{
+    width: 50%;
+    margin-left: 20%;
+    margin-top: 10%;
+    position: relative;
+}
+
+.button-panel{
+    width: 50%;
+    height: 5%;
+    margin-left: 25%;
+    position: relative;
+}
+
+.search-button{
+    height: 100%;
+    width: 80%;
+    background-color: aqua;
+}
+
+.list{
+    width: 100%;
+    height: 80%;
+}
+.dealer-list{
+    width: 35%;
+    height: 100%;
+    list-style-type: none;
+    margin-left: 25%;
+}
+
+.dealer-item{
+    width: 100%;
+    height: 5%;
+    background-color: white;
+}
+
+.dealer-img{
+    width: 15%;
+    position: absolute;
+}
+.dealer-img-field{
+    width: 100%;
+}
+.dealer-info{
+    width: 60%;
+    margin-left: 50%;
+    position: relative;
+}
