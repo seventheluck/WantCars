@@ -2,36 +2,42 @@
 
 })();
 
-const HOST = "http://localhost";
-const PORT = "8090";
-const URL = HOST + ":" + PORT +"/";
+// const HOST = "http://localhost";
+// const PORT = "8090";
+// const URL = HOST + ":" + PORT + "/";
 
-function httpGet(url, parameter) {
+// function httpGet(url, parameter) {
 
-    const http = new XMLHttpRequest();
-    http.open("GET", url, false);
-    //http.responseType = "json";
-    if (parameter !== null)
-        http.send(parameter);
-    else
-        http.send(null);
-    return JSON.parse(http.responseText);
-}
+//     const http = new XMLHttpRequest();
+//     http.open("GET", url, false);
+//     //http.responseType = "json";
+//     if (parameter !== null)
+//         http.send(parameter);
+//     else
+//         http.send(null);
+//     return JSON.parse(http.responseText);
+// }
 
 const searchButton = document.querySelector(".search-button");
 searchButton.addEventListener('click', (e) => {
     searchDealerInfo('1');
     const dealerNameField = document.querySelector(".dealer-name");
-    dealerNameField.addEventListener('click', (e) => {
+    dealerNameField.addEventListener('mouseover', (e) => {
         highlightField(e.target);
     });
+
+    dealerNameField.addEventListener('click', (e) => {
+        const dealerName = dealerNameField.parentElement.querySelector("input");
+        window.location.href = "../vehicle/vehicle.html?dealerID=" + dealerName.value;
+    });
 });
+
 
 function highlightField(targetField) {
     targetField.classList.toggle("click-on");
 }
 
-function searchDealerInventory(dealerID){
+function searchDealerInventory(dealerID) {
     const url = URL + "vehicle?dealerID=" + dealerID;
 }
 
