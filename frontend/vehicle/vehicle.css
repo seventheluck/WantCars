@@ -79,11 +79,24 @@ img:hover {
 }
 
 .car-info-panel{
-    margin-left: 50%;
-    width:60%;
+    margin-left: 0%;
+    width:100%;
     height: 100%;
 }
-
+.car-info-panel-list{
+    width: 100%;
+    height: 100%;
+    list-style-type: none;
+}
+.car-info-panel-item{
+    width: 100%;
+    height: 50%;
+}
+.car-detail-panel{
+    width: 50%;
+    height: 100%;
+    margin-left: 45%;
+}
 .car-title{
     width: 100%;
     height: 10%;
@@ -91,6 +104,7 @@ img:hover {
 
 .car-new-used{
     position: absolute;
+    
 }
 .car-year{
     position: absolute;

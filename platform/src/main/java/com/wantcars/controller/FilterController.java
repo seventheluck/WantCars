@@ -17,7 +17,7 @@ public class FilterController {
     @Autowired
     private VehicleService vehicleService;
 
-    @GetMapping("/vehicle")
+    @GetMapping("/filter")
     public VehicleFilterContent queryVehicleList(@RequestParam String dealerID,
                                           @RequestParam List<String> years,
                                           @RequestParam List<String> brand,
