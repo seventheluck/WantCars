@@ -21,14 +21,103 @@ const filtersObject = {
 (function IIFE() {
     dealerID = getUrlVars()['dealerID'];
     filtersObject['dealerID'] = dealerID;
-    const filters = query('filter');
-    const vehicles = query('vehicle');
-    displayVehicle(vehicles);
+    const param = objectToUrl(filtersObject);
+    const filterUrl = URL + 'filter' + "/" + param;
+    const vehicleUrl = URL + 'vehicle' + "/" + param;
+
+    //const filters = query('filter');
+    // const vehicles = query('vehicle');
+    // displayVehicle(vehicles);
+    queryAndDisplayFilter(filterUrl);
+    queryAndDisplayVehicle(vehicleUrl);
 })();
 
+function queryAndDisplayFilter(url) {
+    fetch(url, {
+        method: "GET",
+        // body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json"
+        }
+        // credentials: "include"
+    }).then(function (response) {
+        response.json().then(
+            function (json) {
+                displayFilter(json);
+            });
+    }, function (error) {
+        displayErrorMessages(error);
+    })
+}
 
-function displayVehicle(response){
-    for(let index = 0; index < response.length; index++) {
+function queryAndDisplayVehicle(url) {
+    fetch(url, {
+        method: "GET",
+        // body: JSON.stringify(data),
+        // headers: {
+        //     "Content-Type": "application/json"
+        // },
+        credentials: "same-origin"
+    }).then(function (response) {
+        response.json().then(function (json) {
+            displayVehicle(json);
+        });
+    }, function (error) {
+        displayErrorMessages(error);
+    })
+}
+
+function displayFilter(response) {
+    const filtersBlock = document.querySelector('.filters-block');
+    const years = response['years'];
+    filtersBlock.insertAdjacentHTML('beforeend', displayFilterItems('Year', years));
+    const brands = response['brand'];
+    filtersBlock.insertAdjacentHTML('beforeend', displayFilterItems('Brand', brands));
+    const models = response['model'];
+    filtersBlock.insertAdjacentHTML('beforeend', displayFilterItems('Model', models));
+    const isnew = response['isNew'];
+    filtersBlock.insertAdjacentHTML('beforeend', displayFilterItems('Type', isnew));
+    const price = response['price'];
+    filtersBlock.insertAdjacentHTML('beforeend', displayFilterItems('Price', price));
+    const excolor = response['exteriorColor'];
+    filtersBlock.insertAdjacentHTML('beforeend', displayFilterItems('Exterior Color', excolor));
+    const incolor = response['interiorColor'];
+    filtersBlock.insertAdjacentHTML('beforeend', displayFilterItems('Interior Color', incolor));
+    const bodyType = response['bodyType'];
+    filtersBlock.insertAdjacentHTML('beforeend', displayFilterItems('Body Type', bodyType));
+    const miles = response['miles'];
+    filtersBlock.insertAdjacentHTML('beforeend', displayFilterItems('Miles', miles));
+}
+
+function displayFilterItems(name, list) {
+    let htmlContent = '';
+    const div = `<li class="filter-block">
+    <div class="filter-title">
+        <p>${name}</p>
+    </div>`
+    if(list == null) {
+        htmlContent = div + `</li>`;
+    } else {
+        htmlContent = div + `
+            <ul class="checkbox-items">
+                ${list.map(item => yearItem(item)).join('')}
+            </ul>
+        </li>`;
+    }
+     
+    return htmlContent;
+}
+
+function yearItem(item) {
+    return `<li class="checkbox-item">
+    <div class="checkbox-box">
+        <input type="checkbox">${item}</input>
+    </div>
+</li>`;
+}
+
+function displayVehicle(response) {
+    for (let index = 0; index < response.length; index++) {
         const item = response[index];
         const vehicleList = document.querySelector('.car-info-panel-list');
         vehicleList.insertAdjacentHTML('beforeend', `<li class="car-info-panel-item">
@@ -61,8 +150,8 @@ function displayVehicle(response){
     }
 }
 
-function newOrUsed(type){
-    if(type == 'true'){
+function newOrUsed(type) {
+    if (type == 'true') {
         return 'New';
     } else {
         return 'Used';
@@ -70,29 +159,29 @@ function newOrUsed(type){
 }
 
 function query(type) {
-    
+
     const param = objectToUrl(filtersObject);
     const url = URL + type + "/" + param;
     const response = httpGet(url, null);
     return response;
 }
+
 function objectToUrl(object) {
     let result = '?';
-    for(let attribute in object){
+    for (let attribute in object) {
         const value = object[attribute];
         result = result + attribute + '=' + stringify(value) + '&';
     }
 
-    return result;
-};
-
-function stringify(array) {
-    if(typeof(array))
-        return array;
-    let result = "";
-    for(let items in array){
-        result = items+",";
-    }
     return result.substring(0, result.length - 1);
 };
 
+function stringify(array) {
+    if (typeof (array))
+        return array;
+    let result = "";
+    for (let items in array) {
+        result = items + ",";
+    }
+    return result.substring(0, result.length - 1);
+};

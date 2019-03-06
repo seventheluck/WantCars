@@ -1,20 +1,21 @@
 .main-panel{
     width: 100%;
-    height: 100em;
+    height: 360em;
     background-color: #f2f2f2;
 }
 /* car search field */
 .search-panel{
     width:20%;
-    height:100%;
+    height:240%;
     position: absolute;
     margin-left: 12.5%;
+    padding-right: 6.5%;
     background-color: white;
 }
 
 .filters-block{
     width: 100%;
-    height:100%;
+    height:30%;
     list-style-type: none;
     margin-left: 0%;
     padding-left: 0%;
@@ -90,7 +91,7 @@ img:hover {
 }
 .car-info-panel-item{
     width: 100%;
-    height: 50%;
+    height: 18em;
 }
 .car-detail-panel{
     width: 50%;
