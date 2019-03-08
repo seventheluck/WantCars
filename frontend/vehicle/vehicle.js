@@ -6,6 +6,44 @@ function getUrlVars() {
     return vars;
 }
 
+const lableMap = {
+    "Year" : "years",
+    "Brand" : "brand",
+    "Model" : "model",
+    "Type" : "isNew",
+    "Price" : "price",
+    "Exterior Color" : "exteriorColor",
+    "Interior Color" : "interiorColor",
+    "Body Type" : "bodyType",
+    "Miles" : "miles"
+}
+
+const customerFilterObject =  {
+    "dealerID": '',
+    "years": [],
+    "brand": [],
+    "model": [],
+    "isNew": [],
+    "price": [],
+    "exteriorColor": [],
+    "interiorColor": [],
+    "bodyType": [],
+    "miles": []
+};
+
+const serverFilterObject =  {
+    "dealerID": '',
+    "years": [],
+    "brand": [],
+    "model": [],
+    "isNew": [],
+    "price": [],
+    "exteriorColor": [],
+    "interiorColor": [],
+    "bodyType": [],
+    "miles": []
+};
+
 const filtersObject = {
     "dealerID": '',
     "years": [],
@@ -47,7 +85,7 @@ function queryAndDisplayFilter(url) {
             });
     }, function (error) {
         displayErrorMessages(error);
-    })
+    }).then(() => addListener());
 }
 
 function queryAndDisplayVehicle(url) {
@@ -185,3 +223,36 @@ function stringify(array) {
     }
     return result.substring(0, result.length - 1);
 };
+
+// function getCustomerFilters() {
+//     const filters = document.querySelectorAll('.filter-block');
+//     for(let i = 0; i < filters.length; i++) {
+//         const nameField = filters[i].querySelector('p');
+//         const name = nameField.innerText;
+
+//     }
+// }
+function clickFilters(event) {
+    const filter = event.target.parentElement.parentElement.parentElement;
+    const nameField = filter.querySelector('p');
+    const name = nameField.innerText;
+    const filterContent = event.target.innerText;
+    const arr = customerFilterObject[lableMap[name]];
+    arr.push(filterContent);
+    event.target.querySelector('input').checked = true;
+}
+
+// const promise = new Promise((resolve, reject) => {
+
+//     resolve("");
+// });
+
+// const filtersBlock = document.querySelector('.filters-block');
+// promise.then(value => addListener());
+function addListener() {
+    const checkBox = document.querySelectorAll('.checkbox-box');
+for(let i = 0; i < checkBox.length; i++) {
+    checkBox[i].addEventListener('click', e => clickFilters(e));
+}
+}
+// filtersBlock.addEventListener('click', e => clickFilters(e));
