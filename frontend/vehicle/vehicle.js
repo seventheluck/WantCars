@@ -57,9 +57,14 @@ const filtersObject = {
     "miles": []
 };
 (function IIFE() {
+    refresh(filtersObject);
+})();
+
+function refresh(paramObject) {
     dealerID = getUrlVars()['dealerID'];
     filtersObject['dealerID'] = dealerID;
-    const param = objectToUrl(filtersObject);
+    customerFilterObject['dealerID'] = dealerID;
+    const param = objectToUrl(paramObject);
     const filterUrl = URL + 'filter' + "/" + param;
     const vehicleUrl = URL + 'vehicle' + "/" + param;
 
@@ -68,7 +73,7 @@ const filtersObject = {
     // displayVehicle(vehicles);
     queryAndDisplayFilter(filterUrl);
     queryAndDisplayVehicle(vehicleUrl);
-})();
+}
 
 function queryAndDisplayFilter(url) {
     fetch(url, {
@@ -107,6 +112,7 @@ function queryAndDisplayVehicle(url) {
 
 function displayFilter(response) {
     const filtersBlock = document.querySelector('.filters-block');
+    removeChildren(filtersBlock);
     const years = response['years'];
     filtersBlock.insertAdjacentHTML('beforeend', displayFilterItems('Year', years));
     const brands = response['brand'];
@@ -155,9 +161,11 @@ function yearItem(item) {
 }
 
 function displayVehicle(response) {
+    const vehicleList = document.querySelector('.car-info-panel-list');
+    removeChildren(vehicleList);
     for (let index = 0; index < response.length; index++) {
         const item = response[index];
-        const vehicleList = document.querySelector('.car-info-panel-list');
+        
         vehicleList.insertAdjacentHTML('beforeend', `<li class="car-info-panel-item">
         <div class="car-photo-panel">
             <img class="car-photo" src="../resources/Cadillac.jpeg" alt="Car Photo" />
@@ -224,14 +232,6 @@ function stringify(array) {
     return result.substring(0, result.length - 1);
 };
 
-// function getCustomerFilters() {
-//     const filters = document.querySelectorAll('.filter-block');
-//     for(let i = 0; i < filters.length; i++) {
-//         const nameField = filters[i].querySelector('p');
-//         const name = nameField.innerText;
-
-//     }
-// }
 // event ==> checkbox-box
 //  <div class="checkbox-box">
 //  <input type="checkbox">${item}</input>
@@ -261,7 +261,7 @@ function clickFilters(event, source) {
         }
         event.querySelector('input').checked = false;
     }
-
+    refresh(customerFilterObject);
 }
 
 function addListener() {
@@ -277,3 +277,11 @@ function addListener() {
     }
 }
 // filtersBlock.addEventListener('click', e => clickFilters(e));
+
+
+function removeChildren(element) {
+    const nodes = element.childNodes;
+    for(let i = nodes.length - 1; i >= 0; i--) {
+        element.removeChild(nodes[i]);
+    }
+}
