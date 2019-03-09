@@ -7,18 +7,18 @@ function getUrlVars() {
 }
 
 const lableMap = {
-    "Year" : "years",
-    "Brand" : "brand",
-    "Model" : "model",
-    "Type" : "isNew",
-    "Price" : "price",
-    "Exterior Color" : "exteriorColor",
-    "Interior Color" : "interiorColor",
-    "Body Type" : "bodyType",
-    "Miles" : "miles"
+    "Year": "years",
+    "Brand": "brand",
+    "Model": "model",
+    "Type": "isNew",
+    "Price": "price",
+    "Exterior Color": "exteriorColor",
+    "Interior Color": "interiorColor",
+    "Body Type": "bodyType",
+    "Miles": "miles"
 }
 
-const customerFilterObject =  {
+const customerFilterObject = {
     "dealerID": '',
     "years": [],
     "brand": [],
@@ -31,7 +31,7 @@ const customerFilterObject =  {
     "miles": []
 };
 
-const serverFilterObject =  {
+const serverFilterObject = {
     "dealerID": '',
     "years": [],
     "brand": [],
@@ -133,7 +133,7 @@ function displayFilterItems(name, list) {
     <div class="filter-title">
         <p>${name}</p>
     </div>`
-    if(list == null) {
+    if (list == null) {
         htmlContent = div + `</li>`;
     } else {
         htmlContent = div + `
@@ -142,7 +142,7 @@ function displayFilterItems(name, list) {
             </ul>
         </li>`;
     }
-     
+
     return htmlContent;
 }
 
@@ -232,27 +232,48 @@ function stringify(array) {
 
 //     }
 // }
-function clickFilters(event) {
-    const filter = event.target.parentElement.parentElement.parentElement;
+// event ==> checkbox-box
+//  <div class="checkbox-box">
+//  <input type="checkbox">${item}</input>
+//  </div>
+function clickFilters(event, source) {
+    const filter = event.parentElement.parentElement.parentElement;
     const nameField = filter.querySelector('p');
     const name = nameField.innerText;
-    const filterContent = event.target.innerText;
+    const filterContent = event.innerText;
     const arr = customerFilterObject[lableMap[name]];
-    arr.push(filterContent);
-    event.target.querySelector('input').checked = true;
+    let flag = false;
+    if(source === 'input') {
+        flag = event.querySelector('input').checked;
+    } else {
+        flag = !event.querySelector('input').checked;
+    }
+    if(flag) {
+        arr.push(filterContent);
+        event.querySelector('input').checked = true;
+    } else {
+        //arr.push(filterContent);
+        for(let i = 0; i < arr.length; i++) {
+            if(arr[i] === filterContent) {
+                arr.splice(i, 1);
+                break;
+            }
+        }
+        event.querySelector('input').checked = false;
+    }
+
 }
 
-// const promise = new Promise((resolve, reject) => {
-
-//     resolve("");
-// });
-
-// const filtersBlock = document.querySelector('.filters-block');
-// promise.then(value => addListener());
 function addListener() {
     const checkBox = document.querySelectorAll('.checkbox-box');
-for(let i = 0; i < checkBox.length; i++) {
-    checkBox[i].addEventListener('click', e => clickFilters(e));
-}
+    for (let i = 0; i < checkBox.length; i++) {
+        checkBox[i].addEventListener('click', (e) => {
+            if ("INPUT" === e.target.nodeName) {
+                clickFilters(e.target.parentElement, "input");
+            } else {
+                clickFilters(e.target, 'others');
+            }
+        });
+    }
 }
 // filtersBlock.addEventListener('click', e => clickFilters(e));
