@@ -280,10 +280,6 @@ public class VehicleManagerImpl implements VehicleManager {
         return this.pageCount;
     }
 
-    public VehicleFilterContent getVehicleFilterContent() {
-        return vehicleFilterContent;
-    }
-
     private String generateConditionSQL(VehicleFilterSelected p) {
         StringBuffer sql = new StringBuffer(" SELECT * FROM vehicle WHERE dealerID=");
 

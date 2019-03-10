@@ -14,8 +14,6 @@ import java.util.List;
 @Service
 public class VehicleServiceImpl implements VehicleService {
 
-    private VehicleFilterSelected parameter;
-    private int pageCount;
     @Autowired
     private VehicleManager vehicleManager;
 
@@ -34,11 +32,6 @@ public class VehicleServiceImpl implements VehicleService {
         List<List<ImageIcon>> res = new ArrayList<>();
 
         return res;
-    }
-
-
-    public VehicleFilterContent getFilterContent() {
-        return vehicleManager.getVehicleFilterContent();
     }
 
     public List<Vehicle> getVehicleList() {

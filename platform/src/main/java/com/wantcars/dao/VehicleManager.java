@@ -28,10 +28,6 @@ public interface VehicleManager {
 
     public List<Vehicle> getVehicles();
 
-
-    public VehicleFilterContent getVehicleFilterContent();
-
-
     public void generateVehicleBySQL(String sql, Vehicle v) throws SQLException;
 
     public void updateFinalPriceAndDiscount(List<Vehicle> vehicles) throws SQLException;

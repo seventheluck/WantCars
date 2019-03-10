@@ -3,6 +3,7 @@ package com.wantcars.controller;
 import com.wantcars.entity.Vehicle;
 import com.wantcars.entity.VehicleFilterContent;
 import com.wantcars.entity.VehicleFilterSelected;
+import com.wantcars.service.FilterService;
 import com.wantcars.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,7 +18,7 @@ import java.util.List;
 public class FilterController {
 
     @Autowired
-    private VehicleService vehicleService;
+    private FilterService filterService;
 
     @GetMapping("/filter")
     public VehicleFilterContent queryVehicleList(@RequestParam String dealerID,
@@ -41,7 +42,7 @@ public class FilterController {
         vehicleFilterSelected.setInteriorColor(interiorColor);
         vehicleFilterSelected.setBodyType(bodyType);
         vehicleFilterSelected.setMiles(miles);
-        VehicleFilterContent result = vehicleService.getFilterContent();
+        VehicleFilterContent result = filterService.getFilterContent(vehicleFilterSelected);
         return result;
     }
 }

@@ -20,7 +20,7 @@ public interface VehicleService {
     public List<List<ImageIcon>> getImages();
 
 
-    public VehicleFilterContent getFilterContent();
+
 
     public List<Vehicle> getVehicleList();
 

@@ -26,6 +26,8 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '27.0.1-jre'
     compile group: 'io.sgr', name: 's2-geometry-library-java', version: '1.0.0'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+    // https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
+    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '1.3.3'
 }
 
 
