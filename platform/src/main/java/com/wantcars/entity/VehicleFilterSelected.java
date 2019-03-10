@@ -16,11 +16,27 @@ public class VehicleFilterSelected {
     private List<String> miles;
 
     private int pageNumber; // must have
+    private int pageSize;
     private SortType sortType;
 
     public VehicleFilterSelected(String dealerID) {
         this.dealerID = dealerID;
-        this.pageNumber = 1;
+        this.pageNumber = 0;
+        this.pageSize = 20;
+    }
+
+    public VehicleFilterSelected(String dealerID, int pageNumber, int pageSize) {
+        this.dealerID = dealerID;
+        this.pageNumber = pageNumber;
+        this.pageSize = pageSize;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
     public String getDealerID() {
@@ -31,7 +47,9 @@ public class VehicleFilterSelected {
         this.dealerID = dealerID;
     }
 
-    public List<String> getYears() { return years; }
+    public List<String> getYears() {
+        return years;
+    }
 
     public void setYears(List<String> years) {
         this.years = years;
@@ -77,7 +95,9 @@ public class VehicleFilterSelected {
         this.exteriorColor = exteriorColor;
     }
 
-    public List<String> getInteriorColor() { return interiorColor; }
+    public List<String> getInteriorColor() {
+        return interiorColor;
+    }
 
     public void setInteriorColor(List<String> interiorColor) {
         this.interiorColor = interiorColor;
@@ -87,20 +107,32 @@ public class VehicleFilterSelected {
         return bodyType;
     }
 
-    public void setBodyType(List<String> bodyType) { this.bodyType = bodyType; }
+    public void setBodyType(List<String> bodyType) {
+        this.bodyType = bodyType;
+    }
 
-    public List<String> getMiles() { return miles; }
+    public List<String> getMiles() {
+        return miles;
+    }
 
     public void setMiles(List<String> miles) {
         this.miles = miles;
     }
 
-    public SortType getSortType() { return this.sortType; }
+    public SortType getSortType() {
+        return this.sortType;
+    }
 
-    public int getPageNumber() { return this.pageNumber; }
+    public void setSortType(SortType sortType) {
+        this.sortType = sortType;
+    }
 
-    public void setPageNumber(int pageNumber) { this.pageNumber = pageNumber; }
+    public int getPageNumber() {
+        return this.pageNumber;
+    }
 
-    public void setSortType(SortType sortType) { this.sortType = sortType; }
+    public void setPageNumber(int pageNumber) {
+        this.pageNumber = pageNumber;
+    }
 
 }
