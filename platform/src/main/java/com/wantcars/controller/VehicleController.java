@@ -26,9 +26,11 @@ public class VehicleController {
                                           @RequestParam List<String> exteriorColor,
                                           @RequestParam List<String> interiorColor,
                                           @RequestParam List<String> bodyType,
-                                          @RequestParam List<String> miles) {
+                                          @RequestParam List<String> miles,
+                                          @RequestParam int pageSize,
+                                          @RequestParam int pageNumber) {
 
-        VehicleFilterSelected vehicleFilterSelected = new VehicleFilterSelected(dealerID);
+        VehicleFilterSelected vehicleFilterSelected = new VehicleFilterSelected(dealerID, pageNumber, pageSize);
         vehicleFilterSelected.setYears(years);
         vehicleFilterSelected.setBrand(brand);
         vehicleFilterSelected.setModel(model);
@@ -41,7 +43,4 @@ public class VehicleController {
         List<Vehicle> result = vehicleService.Query(vehicleFilterSelected);
         return result;
     }
-
-
-
 }

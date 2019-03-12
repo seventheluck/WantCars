@@ -17,20 +17,5 @@ public interface VehicleService {
 
     public List<Vehicle> Query(VehicleFilterSelected parameter);
 
-    public List<List<ImageIcon>> getImages();
-
-
-
-
-    public List<Vehicle> getVehicleList();
-
-    public int getPageCount();
-
-    public Vehicle findVehicleById(int vehicleId) throws SQLException;
-
-    public List<Vehicle> findAllVehiclesByDealerId(String dealerId) throws SQLException;
-
-    public String maintainVehicle(Vehicle vehicle) throws SQLException;
-
-    public boolean deleteVehicleByVehicleId(String vehicleId) throws SQLException;
+    public Vehicle QueryOne(int id);
 }
