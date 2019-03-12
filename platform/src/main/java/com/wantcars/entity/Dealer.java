@@ -15,6 +15,13 @@ public class Dealer {
         this.address = address;
     }
 
+    public Dealer(int id, String name, String add1, String add2, String city, String state, String zip) {
+        Address address = new Address(add1, add2, city, state, zip);
+        this.id = String.valueOf(id);
+        this.name = name;
+        this.address = address;
+    }
+
     public void setId(String id) {
         this.id = id;
     }

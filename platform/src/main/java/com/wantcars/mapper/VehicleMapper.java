@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public interface VehicleMapper {
 
@@ -17,7 +18,7 @@ public interface VehicleMapper {
                     "<foreach item='item' index='index' collection='years' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
-                    "</when>"                     +
+                    "</when>" +
                     "<when test='brand!=null and brand.size() != 0'>" +
                     "and brand in " +
                     "<foreach item='item' index='index' collection='brand' open='(' separator=',' close=')'>" +
@@ -54,14 +55,20 @@ public interface VehicleMapper {
                     "#{item}" +
                     "</foreach>" +
                     "</when>" +
+                    "<when test='miles!=null and miles.size() != 0'>" +
+                    "and miles in " +
+                    "<foreach item='item' index='index' collection='miles' open='(' separator=',' close=')'>" +
+                    "#{item}" +
+                    "</foreach>" +
+                    "</when>" +
                     "limit #{pageNumber}, #{pageSize}",
             "</script>"})
 
     public List<Vehicle> queryAll(VehicleFilterSelected p);
 
-    @Select({ "<script>",
-            "SELECT * " + "FROM vehicle " + "WHERE id =#{dealerID} "
-                    ,
-            "</script>" })
-    public Vehicle queryOne(VehicleFilterSelected p);
+    @Select({"<script>",
+            "SELECT * " + "FROM vehicle " + "WHERE id =#{id} "
+            ,
+            "</script>"})
+    public Vehicle queryOne(int id);
 }

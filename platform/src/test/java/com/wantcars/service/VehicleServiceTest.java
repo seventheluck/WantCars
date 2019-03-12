@@ -1,4 +1,4 @@
-package com.wantcars.mapper;
+package com.wantcars.service;
 
 import com.wantcars.WantCarsApplication;
 import com.wantcars.entity.Vehicle;
@@ -13,20 +13,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = WantCarsApplication.class)
-public class VehicleMapperTest {
+public class VehicleServiceTest {
 
     @Autowired
-    VehicleMapper vehicleMapper;
+    VehicleService vehicleService;
 
     @Test
     public void queryAllWithoutList() {
         VehicleFilterSelected v = new VehicleFilterSelected("10130");
-        List<Vehicle> list = vehicleMapper.queryAll(v);
+        List<Vehicle> list = vehicleService.Query(v);
         assertEquals(20, list.size());
     }
 
@@ -34,7 +35,7 @@ public class VehicleMapperTest {
     public void queryAllWithZeroSizeList() {
         VehicleFilterSelected v = new VehicleFilterSelected("10130");
         v.setYears(new ArrayList<String>());
-        List<Vehicle> list = vehicleMapper.queryAll(v);
+        List<Vehicle> list = vehicleService.Query(v);
         assertEquals(20, list.size());
     }
 
@@ -44,7 +45,7 @@ public class VehicleMapperTest {
         List<String> years = new ArrayList<String>();
         years.add("2015");
         v.setYears(years);
-        List<Vehicle> list = vehicleMapper.queryAll(v);
+        List<Vehicle> list = vehicleService.Query(v);
         assertEquals(20, list.size());
         assertThat(list, hasItem(allOf(
                 hasProperty("year", is("2015"))
@@ -57,14 +58,14 @@ public class VehicleMapperTest {
         List<String> years = new ArrayList<String>();
         years.add("2016");
         v.setYears(years);
-        List<Vehicle> list = vehicleMapper.queryAll(v);
+        List<Vehicle> list = vehicleService.Query(v);
         assertEquals(50, list.size());
         assertThat(list, hasItem(allOf(hasProperty("year", is("2016")))));
     }
 
     @Test
     public void queryOne() {
-        Vehicle vehicle = vehicleMapper.queryOne(296990693);
+        Vehicle vehicle = vehicleService.QueryOne(296990693);
         assertEquals("296990693", vehicle.getId());
     }
 }

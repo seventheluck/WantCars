@@ -21,10 +21,11 @@ public class DealerController {
     @GetMapping("/dealer")
     public List<Dealer> queryDealerList(@RequestParam final String name,
                                         @RequestParam final String location,
+                                        @RequestParam final String postCode,
                                         @RequestParam final int limit,
                                         @RequestParam final int pageSize) throws SQLException {
-        DealerQueryResponse dealerQueryResponse = dealerService.getDealerList(name, location, limit);
-        return dealerQueryResponse.getDealerList();
+        List<Dealer> dealers = dealerService.getDealerList(name, location, postCode, pageSize, limit);
+        return dealers;
     }
 
     @GetMapping("/dealer/detail")
