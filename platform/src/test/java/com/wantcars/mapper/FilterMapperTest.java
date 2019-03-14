@@ -5,6 +5,7 @@ import com.wantcars.dao.FilterManager;
 import com.wantcars.entity.Vehicle;
 import com.wantcars.entity.VehicleFilterSelected;
 import org.junit.Test;
+import org.junit.jupiter.api.Tag;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +20,7 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = WantCarsApplication.class)
+@Tag("development")
 public class FilterMapperTest {
 
     @Autowired
