@@ -20,7 +20,7 @@ const httpPost = function (url, parameter) {
 
 
 
-const HOST = "http://localhost";
+const HOST = "http://wantcars-0-3-snapshot.m6kw7wztz4.us-west-2.elasticbeanstalk.com";
 const PORT = "8090";
 const URL = HOST + ":" + PORT + "/";
 

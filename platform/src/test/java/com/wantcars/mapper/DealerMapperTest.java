@@ -4,6 +4,9 @@ import com.wantcars.WantCarsApplication;
 import com.wantcars.entity.Dealer;
 import com.wantcars.entity.DealerParameter;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,10 +21,13 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = WantCarsApplication.class)
+@DisplayName("Test case for Dealer")
+@Tag("development")
 public class DealerMapperTest {
 
     @Autowired
     DealerMapper dealerMapper;
+
 
     @Test
     public void queryDealerSize() {

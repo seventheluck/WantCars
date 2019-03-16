@@ -11,7 +11,7 @@ import java.util.List;
 public interface VehicleMapper {
 
     @Select({"<script>",
-            "Select * from vehicle " +
+            "Select *, inColor as interiorColor, exColor as exteriorColor from vehicle " +
                     "where dealerID =#{dealerID}" +
                     "<when test='years != null and years.size() != 0'>" +
                     "and year in " +
@@ -50,7 +50,7 @@ public interface VehicleMapper {
                     "</foreach>" +
                     "</when>" +
                     "<when test='isNew!=null and isNew.size() != 0'>" +
-                    "and type in " +
+                    "and isNew in " +
                     "<foreach item='item' index='index' collection='isNew' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
@@ -58,6 +58,12 @@ public interface VehicleMapper {
                     "<when test='miles!=null and miles.size() != 0'>" +
                     "and miles in " +
                     "<foreach item='item' index='index' collection='miles' open='(' separator=',' close=')'>" +
+                    "#{item}" +
+                    "</foreach>" +
+                    "</when>" +
+                    "<when test='bodyType!=null and bodyType.size() != 0'>" +
+                    "and bodyType in " +
+                    "<foreach item='item' index='index' collection='bodyType' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
                     "</when>" +
