@@ -15,6 +15,7 @@ public class FilterServiceImpl implements FilterService{
     public VehicleFilterContent getFilterContent(VehicleFilterSelected vehicleFilterSelected) {
 
         VehicleFilterContent vehicleFilterContent = new VehicleFilterContent();
+        vehicleFilterContent.setDealerID(vehicleFilterSelected.getDealerID());
         vehicleFilterContent.setBodyType(filterMapper.queryBodyType(vehicleFilterSelected));
         vehicleFilterContent.setBrand(filterMapper.queryBrand(vehicleFilterSelected));
         vehicleFilterContent.setExteriorColor(filterMapper.queryExColor(vehicleFilterSelected));

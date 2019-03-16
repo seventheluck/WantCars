@@ -1,9 +1,7 @@
 package com.wantcars.service;
 
-import com.wantcars.dao.DealerManager;
 import com.wantcars.entity.Dealer;
 import com.wantcars.entity.DealerParameter;
-import com.wantcars.entity.DealerQueryResponse;
 import com.wantcars.mapper.DealerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

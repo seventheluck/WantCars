@@ -50,7 +50,7 @@ public interface FilterMapper {
                     "</foreach>" +
                     "</when>" +
                     "<when test='isNew!=null and isNew.size() != 0'>" +
-                    "and type in " +
+                    "and isNew in " +
                     "<foreach item='item' index='index' collection='isNew' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
@@ -58,6 +58,12 @@ public interface FilterMapper {
                     "<when test='miles!=null and miles.size() != 0'>" +
                     "and miles in " +
                     "<foreach item='item' index='index' collection='miles' open='(' separator=',' close=')'>" +
+                    "#{item}" +
+                    "</foreach>" +
+                    "</when>" +
+                    "<when test='bodyType!=null and bodyType.size() != 0'>" +
+                    "and bodyType in " +
+                    "<foreach item='item' index='index' collection='bodyType' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
                     "</when>" +
@@ -105,7 +111,7 @@ public interface FilterMapper {
                     "</foreach>" +
                     "</when>" +
                     "<when test='isNew!=null and isNew.size() != 0'>" +
-                    "and type in " +
+                    "and isNew in " +
                     "<foreach item='item' index='index' collection='isNew' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
@@ -113,6 +119,12 @@ public interface FilterMapper {
                     "<when test='miles!=null and miles.size() != 0'>" +
                     "and miles in " +
                     "<foreach item='item' index='index' collection='miles' open='(' separator=',' close=')'>" +
+                    "#{item}" +
+                    "</foreach>" +
+                    "</when>" +
+                    "<when test='bodyType!=null and bodyType.size() != 0'>" +
+                    "and bodyType in " +
+                    "<foreach item='item' index='index' collection='bodyType' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
                     "</when>" +
@@ -160,7 +172,7 @@ public interface FilterMapper {
                     "</foreach>" +
                     "</when>" +
                     "<when test='isNew!=null and isNew.size() != 0'>" +
-                    "and type in " +
+                    "and isNew in " +
                     "<foreach item='item' index='index' collection='isNew' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
@@ -168,6 +180,12 @@ public interface FilterMapper {
                     "<when test='miles!=null and miles.size() != 0'>" +
                     "and miles in " +
                     "<foreach item='item' index='index' collection='miles' open='(' separator=',' close=')'>" +
+                    "#{item}" +
+                    "</foreach>" +
+                    "</when>" +
+                    "<when test='bodyType!=null and bodyType.size() != 0'>" +
+                    "and bodyType in " +
+                    "<foreach item='item' index='index' collection='bodyType' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
                     "</when>" +
@@ -215,7 +233,7 @@ public interface FilterMapper {
                     "</foreach>" +
                     "</when>" +
                     "<when test='isNew!=null and isNew.size() != 0'>" +
-                    "and type in " +
+                    "and isNew in " +
                     "<foreach item='item' index='index' collection='isNew' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
@@ -223,6 +241,12 @@ public interface FilterMapper {
                     "<when test='miles!=null and miles.size() != 0'>" +
                     "and miles in " +
                     "<foreach item='item' index='index' collection='miles' open='(' separator=',' close=')'>" +
+                    "#{item}" +
+                    "</foreach>" +
+                    "</when>" +
+                    "<when test='bodyType!=null and bodyType.size() != 0'>" +
+                    "and bodyType in " +
+                    "<foreach item='item' index='index' collection='bodyType' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
                     "</when>" +
@@ -270,7 +294,7 @@ public interface FilterMapper {
                     "</foreach>" +
                     "</when>" +
                     "<when test='isNew!=null and isNew.size() != 0'>" +
-                    "and type in " +
+                    "and isNew in " +
                     "<foreach item='item' index='index' collection='isNew' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
@@ -278,6 +302,12 @@ public interface FilterMapper {
                     "<when test='miles!=null and miles.size() != 0'>" +
                     "and miles in " +
                     "<foreach item='item' index='index' collection='miles' open='(' separator=',' close=')'>" +
+                    "#{item}" +
+                    "</foreach>" +
+                    "</when>" +
+                    "<when test='bodyType!=null and bodyType.size() != 0'>" +
+                    "and bodyType in " +
+                    "<foreach item='item' index='index' collection='bodyType' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
                     "</when>" +
@@ -325,7 +355,7 @@ public interface FilterMapper {
                     "</foreach>" +
                     "</when>" +
                     "<when test='isNew!=null and isNew.size() != 0'>" +
-                    "and type in " +
+                    "and isNew in " +
                     "<foreach item='item' index='index' collection='isNew' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
@@ -333,6 +363,12 @@ public interface FilterMapper {
                     "<when test='miles!=null and miles.size() != 0'>" +
                     "and miles in " +
                     "<foreach item='item' index='index' collection='miles' open='(' separator=',' close=')'>" +
+                    "#{item}" +
+                    "</foreach>" +
+                    "</when>" +
+                    "<when test='bodyType!=null and bodyType.size() != 0'>" +
+                    "and bodyType in " +
+                    "<foreach item='item' index='index' collection='bodyType' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
                     "</when>" +
@@ -380,7 +416,7 @@ public interface FilterMapper {
                     "</foreach>" +
                     "</when>" +
                     "<when test='isNew!=null and isNew.size() != 0'>" +
-                    "and type in " +
+                    "and isNew in " +
                     "<foreach item='item' index='index' collection='isNew' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
@@ -391,12 +427,18 @@ public interface FilterMapper {
                     "#{item}" +
                     "</foreach>" +
                     "</when>" +
+                    "<when test='bodyType!=null and bodyType.size() != 0'>" +
+                    "and bodyType in " +
+                    "<foreach item='item' index='index' collection='bodyType' open='(' separator=',' close=')'>" +
+                    "#{item}" +
+                    "</foreach>" +
+                    "</when>" +
                     "limit #{pageNumber}, #{pageSize}",
             "</script>"})
     public List<String> queryInColor(VehicleFilterSelected v);
 
     @Select({"<script>" ,
-            "Select distinct(type) as isNew from vehicle " +
+            "Select distinct(bodyType) as isNew from vehicle " +
                     "where dealerID =#{dealerID}" +
                     "<when test='years != null and years.size() != 0'>" +
                     "and year in " +
@@ -435,7 +477,7 @@ public interface FilterMapper {
                     "</foreach>" +
                     "</when>" +
                     "<when test='isNew!=null and isNew.size() != 0'>" +
-                    "and type in " +
+                    "and isNew in " +
                     "<foreach item='item' index='index' collection='isNew' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
@@ -443,6 +485,12 @@ public interface FilterMapper {
                     "<when test='miles!=null and miles.size() != 0'>" +
                     "and miles in " +
                     "<foreach item='item' index='index' collection='miles' open='(' separator=',' close=')'>" +
+                    "#{item}" +
+                    "</foreach>" +
+                    "</when>" +
+                    "<when test='bodyType!=null and bodyType.size() != 0'>" +
+                    "and bodyType in " +
+                    "<foreach item='item' index='index' collection='bodyType' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
                     "</when>" +
@@ -490,7 +538,7 @@ public interface FilterMapper {
                     "</foreach>" +
                     "</when>" +
                     "<when test='isNew!=null and isNew.size() != 0'>" +
-                    "and type in " +
+                    "and isNew in " +
                     "<foreach item='item' index='index' collection='isNew' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
@@ -498,6 +546,12 @@ public interface FilterMapper {
                     "<when test='miles!=null and miles.size() != 0'>" +
                     "and miles in " +
                     "<foreach item='item' index='index' collection='miles' open='(' separator=',' close=')'>" +
+                    "#{item}" +
+                    "</foreach>" +
+                    "</when>" +
+                    "<when test='bodyType!=null and bodyType.size() != 0'>" +
+                    "and bodyType in " +
+                    "<foreach item='item' index='index' collection='bodyType' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
                     "</when>" +

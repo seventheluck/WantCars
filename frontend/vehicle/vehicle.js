@@ -30,6 +30,7 @@ const customerFilterObject = {
     "bodyType": [],
     "miles": []
 };
+//init
 
 const serverFilterObject = {
     "dealerID": '',
@@ -43,7 +44,7 @@ const serverFilterObject = {
     "bodyType": [],
     "miles": []
 };
-
+// combined
 const filtersObject = {
     "dealerID": '',
     "years": [],
@@ -75,6 +76,34 @@ function refresh(paramObject) {
     queryAndDisplayVehicle(vehicleUrl);
 }
 
+function refreshVehicles(paramObject) {
+    dealerID = getUrlVars()['dealerID'];
+    filtersObject['dealerID'] = dealerID;
+    customerFilterObject['dealerID'] = dealerID;
+    const param = objectToUrl(paramObject);
+    const vehicleUrl = URL + 'vehicle' + "/" + param;
+
+    //const filters = query('filter');
+    // const vehicles = query('vehicle');
+    // displayVehicle(vehicles);
+    //queryAndDisplayFilter(filterUrl);
+    queryAndDisplayVehicle(vehicleUrl);
+}
+
+function refreshFilters(paramObject) {
+    dealerID = getUrlVars()['dealerID'];
+    filtersObject['dealerID'] = dealerID;
+    customerFilterObject['dealerID'] = dealerID;
+    const param = objectToUrl(paramObject);
+    const filterUrl = URL + 'filter' + "/" + param;
+
+    //const filters = query('filter');
+    // const vehicles = query('vehicle');
+    // displayVehicle(vehicles);
+    queryAndDisplayFilter(filterUrl);
+    //queryAndDisplayVehicle(vehicleUrl);
+}
+
 function queryAndDisplayFilter(url) {
     fetch(url, {
         method: "GET",
@@ -86,6 +115,7 @@ function queryAndDisplayFilter(url) {
     }).then(function (response) {
         response.json().then(
             function (json) {
+                combine(json, customerFilterObject);
                 displayFilter(json);
             });
     }, function (error) {
@@ -110,7 +140,7 @@ function queryAndDisplayVehicle(url) {
     })
 }
 
-function displayFilter(response) {
+function displayFilter(response, name) {
     const filtersBlock = document.querySelector('.filters-block');
     removeChildren(filtersBlock);
     const years = response['years'];
@@ -197,7 +227,7 @@ function displayVehicle(response) {
 }
 
 function newOrUsed(type) {
-    if (type == 'true') {
+    if (type == 1) {
         return 'New';
     } else {
         return 'Used';
@@ -219,7 +249,7 @@ function objectToUrl(object) {
         result = result + attribute + '=' + stringify(value) + '&';
     }
 
-    return result.substring(0, result.length - 1);
+    return result.substring(0, result.length - 1) + "&pageSize=20&pageNumber=0";
 };
 
 function stringify(array) {
@@ -261,7 +291,7 @@ function clickFilters(event, source) {
         }
         event.querySelector('input').checked = false;
     }
-    refresh(customerFilterObject);
+    refreshVehicles(customerFilterObject);
 }
 
 function addListener() {
@@ -283,5 +313,12 @@ function removeChildren(element) {
     const nodes = element.childNodes;
     for(let i = nodes.length - 1; i >= 0; i--) {
         element.removeChild(nodes[i]);
+    }
+}
+
+function combine(responseObject, customerObject) {
+    for(let prop in responseObject) {
+        const resArr = responseObject[prop];
+        const cusArr = customerObject[prop];
     }
 }

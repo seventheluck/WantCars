@@ -25,7 +25,7 @@ public class FilterController {
                                           @RequestParam List<String> years,
                                           @RequestParam List<String> brand,
                                           @RequestParam List<String> model,
-                                          @RequestParam List<String> isNew,
+                                          @RequestParam List<Integer> isNew,
                                           @RequestParam List<String> price,
                                           @RequestParam List<String> exteriorColor,
                                           @RequestParam List<String> interiorColor,

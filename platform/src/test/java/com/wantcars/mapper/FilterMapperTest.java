@@ -1,8 +1,6 @@
 package com.wantcars.mapper;
 
 import com.wantcars.WantCarsApplication;
-import com.wantcars.dao.FilterManager;
-import com.wantcars.entity.Vehicle;
 import com.wantcars.entity.VehicleFilterSelected;
 import org.junit.Test;
 import org.junit.jupiter.api.Tag;

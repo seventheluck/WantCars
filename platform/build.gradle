@@ -3,9 +3,8 @@ apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-
 group 'wantcars'
-version '1.0-SNAPSHOT'
+//version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 repositories {
@@ -13,7 +12,9 @@ repositories {
 }
 
 dependencies {
-//    testCompile group: 'junit', name: 'junit', version: '4.12'
+    // https://mvnrepository.com/artifact/gradle.plugin.fi.evident.gradle.beanstalk/gradle-beanstalk-plugin
+    //compile group: 'gradle.plugin.fi.evident.gradle.beanstalk', name: 'gradle-beanstalk-plugin', version: '0.2.1'
+
     testCompile("org.junit.jupiter:junit-jupiter-api:5.4.0")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.4.0")
     // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite-api
@@ -32,6 +33,7 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
     // https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
     compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '1.3.3'
+
 }
 
 
@@ -44,5 +46,58 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.fi.evident.gradle.beanstalk:gradle-beanstalk-plugin:0.2.1"
+    }
+}
+
+apply plugin: "fi.evident.beanstalk"
+
+// beanstalk requires unique version number for each uploaded archive
+// SNAPSHOT will be replaced with 'yyyyMMdd.HHmms' label
+version = '0.3-SNAPSHOT'
+
+//shadowJar {
+//    archiveName = 'wantcars.jar'
+//}
+
+//task war(type: War) {
+//    archiveName "wantcars.staging.war"
+//}
+//
+//task productionWar(type: War) {
+//    archiveName "wantcars.production.war"
+//}
+
+beanstalk {
+    profile = 'my-profile' // Only required if using .aws/credentials
+    s3Endpoint = "s3.us-west-2.amazonaws.com"
+    beanstalkEndpoint = "elasticbeanstalk.us-west-2.amazonaws.com"
+
+    deployments {
+        // Example to deploy to the same env
+        staging {
+            file = tasks.jar
+            application = 'my-first-webapp-beanstalk'
+            environment = "wantcars-${project.version.replaceAll('\\.', '-')}"
+
+        }
+        // Example to create a new env for each version (to use URL swapping for blue/green deployment)
+        production {
+            file = tasks.jar
+            application = 'my-first-webapp-beanstalk'
+            environment = "wantcars-${project.version.replaceAll('\\.', '-')}"
+            //environment = "wantcars"
+            template = 'default' // Saved configuration name to use to create each env
+        }
     }
 }
