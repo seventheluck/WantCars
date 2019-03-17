@@ -4,6 +4,7 @@ import com.wantcars.entity.Vehicle;
 import com.wantcars.entity.VehicleFilterSelected;
 import com.wantcars.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ public class VehicleController {
     @Autowired
     private VehicleService vehicleService;
 
+    @CrossOrigin(origins = "http://wantcars-front.s3-website-us-west-2.amazonaws.com")
     @GetMapping("/vehicle")
     public List<Vehicle> queryVehicleList(@RequestParam String dealerID,
                                           @RequestParam List<String> years,
