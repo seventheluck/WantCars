@@ -20,6 +20,7 @@ public class FilterController {
     @Autowired
     private FilterService filterService;
 
+    @CrossOrigin(origins = "http://wantcars-front.s3-website-us-west-2.amazonaws.com")
     @GetMapping("/filter")
     public VehicleFilterContent queryVehicleList(@RequestParam String dealerID,
                                           @RequestParam List<String> years,
