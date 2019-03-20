@@ -15,7 +15,7 @@ public class DealerController {
     @Autowired
     private DealerService dealerService;
 
-    @CrossOrigin(origins = "http://wantcars-front.s3-website-us-west-2.amazonaws.com")
+    @CrossOrigin(origins = {"http://wantcars-front.s3-website-us-west-2.amazonaws.com", "http://localhost:3000"})
     @GetMapping("/dealer")
     public List<Dealer> queryDealerList(@RequestParam final String name,
                                         @RequestParam final String location,
@@ -26,7 +26,7 @@ public class DealerController {
         return dealers;
     }
 
-    @CrossOrigin(origins = "http://wantcars-front.s3-website-us-west-2.amazonaws.com")
+    @CrossOrigin(origins = {"http://wantcars-front.s3-website-us-west-2.amazonaws.com", "http://localhost:3000"})
     @GetMapping("/dealer/detail")
     public Dealer queryDealerList(@RequestParam final String id) throws SQLException {
         return dealerService.queryDealerDetail(id);
