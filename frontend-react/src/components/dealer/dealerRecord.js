@@ -4,9 +4,13 @@ class DealerRecord extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: props.id,
             dealerName: props.dealerName,
             address: props.address
         }
+    }
+    searchVehicle = dealerID => {
+        console.log(this.state.id);
     }
     render() {
         return (
@@ -19,7 +23,7 @@ class DealerRecord extends React.Component {
                         </div>
                         <div className="column">
                             <div className="dealer-info">
-                                <p className="dealer-name">Name: {this.state.dealerName}</p>
+                                <button className="ui button" onClick={this.searchVehicle}>{this.state.dealerName}</button>
                                 <input type="hidden"  value="id"/>
                                 <p>Address: {this.state.address}</p>
                             </div>
@@ -27,6 +31,26 @@ class DealerRecord extends React.Component {
                     </div>
             </div>
         );
+        // return (
+            
+        //         <div className="item">
+        //             <div className="image">
+        //             <img src="./resources/dealer.jpg" alt="Dealer" />
+        //             </div>
+        //             <div className="content">
+        //                 <button className="header">Header</button>
+        //                 <div className="meta">
+        //                     <span>Description</span>
+        //                 </div>
+        //                 <div className="description">
+        //                     <p></p>
+        //                 </div>
+        //                 <div className="extra">
+        //                     Additional Details
+        //                 </div>
+        //             </div>
+        //         </div>
+        // );
     }
 };
 
