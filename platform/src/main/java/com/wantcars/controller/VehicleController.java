@@ -17,7 +17,7 @@ public class VehicleController {
     @Autowired
     private VehicleService vehicleService;
 
-    @CrossOrigin(origins = "http://wantcars-front.s3-website-us-west-2.amazonaws.com")
+    @CrossOrigin(origins = {"http://wantcars-front.s3-website-us-west-2.amazonaws.com", "http://localhost:3000"})
     @GetMapping("/vehicle")
     public List<Vehicle> queryVehicleList(@RequestParam String dealerID,
                                           @RequestParam List<String> years,
