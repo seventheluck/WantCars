@@ -9,4 +9,4 @@ Visit link [Website: http://wantcars-front.s3-website-us-west-2.amazonaws.com/de
 - Developed dynamic website, used Javascript and DOM to perform multiple tasks
 - Created desktop application for vehicle inventory management using Java Swing Libraries
 
-[1]:(/images/my_posts/wantcars/dealer.png)
+[1]:(seventheluck.github.io/images/my_posts/wantcars/dealer.png)
