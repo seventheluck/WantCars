@@ -5,9 +5,9 @@ import VehicleContent from './vehicle/vehicleContent';
 
 const App = () => {
     return (
-        <DealerContent />
+        // <DealerContent />
 
-        // <VehicleContent />
+        <VehicleContent id={10131} />
     );
 };
 

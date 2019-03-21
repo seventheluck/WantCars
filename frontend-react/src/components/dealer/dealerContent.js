@@ -1,9 +1,8 @@
 import React from 'react';
 import DealerQueryPanel from './dealerQueryPanel';
 import DealerRecord from './dealerRecord';
-import components from '../../css/components.css';
-import axios from 'axios';
-import URL from '../configue';
+import '../../css/components.css';
+import wantcarsapi from '../api/wantcarsapi';
 
 class DealerContent extends React.Component {
     state = {
@@ -20,8 +19,17 @@ class DealerContent extends React.Component {
     }
         // avliding this is undefined error, use arrow function!
         search = (dealerName, city) => {
-            const url = URL + '/dealer/?name=' + dealerName +'&location='+ city+'&postCode=98006&limit=0&pageSize=20';
-            axios.get(url).then(
+            wantcarsapi.get('/dealer/',
+                {
+                    params: {
+                                name: dealerName,
+                                location: city,
+                                postCode: '98006',
+                                limit: 0,
+                                pageSize: 20
+                            }
+                }
+            ).then(
                 res => this.displayDealerRecords(res.data),
                 err => this.show(err)
             )
