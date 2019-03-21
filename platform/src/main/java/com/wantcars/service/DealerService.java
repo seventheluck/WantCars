@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface DealerService {
     List<Dealer> getDealerList(String dealerName, String city, String zip, int pageSize, int pageNumber) throws SQLException;
-    Dealer queryDealerDetail(String id) throws SQLException;
+    int getDealerCount(String dealerName, String city, String zip);
+    Dealer queryDealerDetail(String id) throws SQLException;;
 }

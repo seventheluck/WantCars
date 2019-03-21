@@ -27,8 +27,16 @@ public class DealerController {
     }
 
     @CrossOrigin(origins = {"http://wantcars-front.s3-website-us-west-2.amazonaws.com", "http://localhost:3000"})
+    @GetMapping("/dealer/count")
+    public int queryDealerTotalCount(@RequestParam final String name,
+                                        @RequestParam final String location,
+                                        @RequestParam final String postCode) throws SQLException {
+        return  dealerService.getDealerCount(name, location, postCode);
+    }
+
+    @CrossOrigin(origins = {"http://wantcars-front.s3-website-us-west-2.amazonaws.com", "http://localhost:3000"})
     @GetMapping("/dealer/detail")
-    public Dealer queryDealerList(@RequestParam final String id) throws SQLException {
+    public Dealer queryDealerDetail(@RequestParam final String id) throws SQLException {
         return dealerService.queryDealerDetail(id);
     }
 }

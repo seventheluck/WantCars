@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,11 +16,31 @@ public class DealerServiceImpl implements DealerService {
     @Autowired
     private DealerMapper dealerMapper;
 
-    public List<Dealer> getDealerList(String dealerName, String city, String zip, int pageSize, int pageNumber) throws SQLException {
+    public List<Dealer> getDealerList(String dealerName, String city, String zip, int pageSize, int pageNumber) {
+        // TODO
         List<String> postCode = null;
         DealerParameter dealerParameter = new DealerParameter(0, dealerName, city
                 , postCode, pageNumber, pageSize);
-        return dealerMapper.searchDealers(dealerParameter);
+        try {
+            return dealerMapper.searchDealers(dealerParameter);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<Dealer>();
+    }
+
+    @Override
+    public int getDealerCount(String dealerName, String city, String zip) {
+        // TODO
+        List<String> postCode = null;
+        DealerParameter dealerParameter = new DealerParameter(0, dealerName, city
+                , postCode, 0, 0);
+        try {
+            return dealerMapper.searchDealerCount(dealerParameter);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     @Override

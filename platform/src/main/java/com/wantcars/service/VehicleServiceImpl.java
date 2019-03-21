@@ -14,7 +14,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Autowired
     private VehicleMapper vehicleMapper;
 
-    public List<Vehicle> Query(VehicleFilterSelected parameter) {
+    public List<Vehicle> query(VehicleFilterSelected parameter) {
 
         try {
             return vehicleMapper.queryAll(parameter);
@@ -22,6 +22,16 @@ public class VehicleServiceImpl implements VehicleService {
             e.printStackTrace();
         }
         return new ArrayList<Vehicle>();
+    }
+
+    @Override
+    public int queryTotalNumbers(VehicleFilterSelected parameter) {
+        try {
+            return vehicleMapper.queryTotalNumbers(parameter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     @Override

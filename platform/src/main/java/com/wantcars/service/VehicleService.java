@@ -15,7 +15,7 @@ import java.util.List;
 
 public interface VehicleService {
 
-    public List<Vehicle> Query(VehicleFilterSelected parameter);
-
+    public List<Vehicle> query(VehicleFilterSelected parameter);
+    public int queryTotalNumbers(VehicleFilterSelected parameter);
     public Vehicle QueryOne(int id);
 }

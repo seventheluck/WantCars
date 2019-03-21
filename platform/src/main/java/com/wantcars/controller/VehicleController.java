@@ -20,15 +20,15 @@ public class VehicleController {
     @CrossOrigin(origins = {"http://wantcars-front.s3-website-us-west-2.amazonaws.com", "http://localhost:3000"})
     @GetMapping("/vehicle")
     public List<Vehicle> queryVehicleList(@RequestParam String dealerID,
-                                          @RequestParam List<String> years,
-                                          @RequestParam List<String> brand,
-                                          @RequestParam List<String> model,
-                                          @RequestParam List<Integer> isNew,
-                                          @RequestParam List<String> price,
-                                          @RequestParam List<String> exteriorColor,
-                                          @RequestParam List<String> interiorColor,
-                                          @RequestParam List<String> bodyType,
-                                          @RequestParam List<String> miles,
+                                          @RequestParam(required = false) List<String> years,
+                                          @RequestParam(required = false) List<String> brand,
+                                          @RequestParam(required = false) List<String> model,
+                                          @RequestParam(required = false) List<Integer> isNew,
+                                          @RequestParam(required = false) List<String> price,
+                                          @RequestParam(required = false) List<String> exteriorColor,
+                                          @RequestParam(required = false) List<String> interiorColor,
+                                          @RequestParam(required = false) List<String> bodyType,
+                                          @RequestParam(required = false) List<String> miles,
                                           @RequestParam int pageSize,
                                           @RequestParam int pageNumber) {
 
@@ -42,7 +42,7 @@ public class VehicleController {
         vehicleFilterSelected.setInteriorColor(interiorColor);
         vehicleFilterSelected.setBodyType(bodyType);
         vehicleFilterSelected.setMiles(miles);
-        List<Vehicle> result = vehicleService.Query(vehicleFilterSelected);
+        List<Vehicle> result = vehicleService.query(vehicleFilterSelected);
         return result;
     }
 }

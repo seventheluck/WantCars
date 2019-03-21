@@ -1,42 +1,67 @@
 import React from 'react';
 
 class VehicleRecord extends React.Component {
+    state = {
+        dealerID: this.props.id,
+        vehicles: this.props.vehicles,
+    }
+
     render() {
+        console.log(this.props.vehicles);
         return (
-            <div className="ui segment">
-                <div className="ui two column very relaxed grid">
-                    <div className="column">
+                <div className="ui items">
+                    {this.display(this.state.vehicles)}
+                </div>
+        );
+    }
+
+    newOrUsed = (flag) => {
+        if(flag) return 'New';
+        else return 'Used';
+    }
+
+    vehicle= (vehicle) => {
+        return (
+            
+                <div key={vehicle.id} className="ui raised very padded text container segment">
+                <div className="ui grid">
+                <div className="ten wide column">
+                    <div className="ui raised segment">
+                        <a className="ui red ribbon label">{this.newOrUsed(vehicle.isNew)}</a>
                         <div className="ui medium rounded image">
-                            <img className="car-photo" src="./resources/Cadillac.jpeg" alt="Car Photo" />
-                        </div>
-                    </div>
-                    <div className="column">
-                        <div className="car-detail-panel">
-                            <div className="car-title">
-                                <input className="car-id" type="hidden" value="${item.id}" />
-                                <p className="car-new-used">New</p>
-                                <p className="car-year">2019</p>
-                                <p className="car-brand">Ford</p>
-                                <p className="car-model">Fiesta</p>
-                            </div>
-                            <div className="car-price">
-                                <p className="price">$19999</p>
-                            </div>
-                            <div className="car-color">
-                                <p className="car-exterior-color">Exterior Color: Blue</p>
-                                <p className="car-interior-color">Interior Color: Black</p>
-                            </div>
-                            <div className="car-type">
-                                <p className="car-type-detail">Sedan</p>
-                            </div>
-                            <div className="car-miles">
-                                <p className="car-miles-number">0 Miles</p>
-                            </div>
+                            <img src="./resources/Cadillac.jpeg" alt="Photo" description="car"/>
                         </div>
                     </div>
                 </div>
+                <div className="six wide column">
+                <div className="content">
+                        <h3 className="ui header">{vehicle.year} {vehicle.brand} {vehicle.model}</h3>
+                        <div className="ui divider"></div>
+                        <div className="meta">
+                            <span className="price">${vehicle.price}</span>
+                        </div>
+                        <div className="description">
+                        <span >Miles: {vehicle.miles}</span>
+                        <br/>
+                        <span >Body Type: {vehicle.bodyType}</span>
+                        <br/>
+                        <span >Exterior Color: {vehicle.exteriorColor}</span>
+                        <br/>
+                        <span >Interior Color: {vehicle.interiorColor}</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
             </div>
         );
+    }
+
+    display = (vehicles) => {
+        const vehicleRecords = [];
+        vehicles.map(
+            oneVehicle => vehicleRecords.push(this.vehicle(oneVehicle))
+        );
+        return vehicleRecords;
     }
 };
 
