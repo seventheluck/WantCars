@@ -45,8 +45,7 @@ public interface DealerMapper {
                     "<foreach item='item' collection='postCode' index='index' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
-                    "</when>" +
-                    " limit #{pageNumber}, #{pageSize}",
+                    "</when>",
             "</script>"})
     public int searchDealerCount(DealerParameter dealerParameter) throws SQLException;
     @Select({"<script>",

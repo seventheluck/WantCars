@@ -2,6 +2,7 @@ package com.wantcars.controller;
 
 import com.wantcars.entity.Dealer;
 import com.wantcars.entity.DealerQueryResponse;
+import com.wantcars.entity.DealerResponse;
 import com.wantcars.service.DealerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +18,15 @@ public class DealerController {
 
     @CrossOrigin(origins = {"http://wantcars-front.s3-website-us-west-2.amazonaws.com", "http://localhost:3000"})
     @GetMapping("/dealer")
-    public List<Dealer> queryDealerList(@RequestParam final String name,
+    public DealerResponse queryDealerList(@RequestParam final String name,
                                         @RequestParam final String location,
                                         @RequestParam final String postCode,
                                         @RequestParam final int limit,
                                         @RequestParam final int pageSize) throws SQLException {
         List<Dealer> dealers = dealerService.getDealerList(name, location, postCode, pageSize, limit);
-        return dealers;
+        int totalNumber = dealerService.getDealerCount(name, location, postCode);
+        DealerResponse ds = new DealerResponse(dealers, totalNumber);
+        return ds;
     }
 
     @CrossOrigin(origins = {"http://wantcars-front.s3-website-us-west-2.amazonaws.com", "http://localhost:3000"})

@@ -23,15 +23,15 @@ public class FilterController {
     @CrossOrigin(origins = {"http://wantcars-front.s3-website-us-west-2.amazonaws.com", "http://localhost:3000"})
     @GetMapping("/filter")
     public VehicleFilterContent queryVehicleList(@RequestParam String dealerID,
-                                          @RequestParam List<String> years,
-                                          @RequestParam List<String> brand,
-                                          @RequestParam List<String> model,
-                                          @RequestParam List<Integer> isNew,
-                                          @RequestParam List<String> price,
-                                          @RequestParam List<String> exteriorColor,
-                                          @RequestParam List<String> interiorColor,
-                                          @RequestParam List<String> bodyType,
-                                          @RequestParam List<String> miles) {
+                                                 @RequestParam(required = false) List<String> years,
+                                                 @RequestParam(required = false) List<String> brand,
+                                                 @RequestParam(required = false) List<String> model,
+                                                 @RequestParam(required = false) List<Integer> isNew,
+                                                 @RequestParam(required = false) List<String> price,
+                                                 @RequestParam(required = false) List<String> exteriorColor,
+                                                 @RequestParam(required = false) List<String> interiorColor,
+                                                 @RequestParam(required = false) List<String> bodyType,
+                                                 @RequestParam(required = false) List<String> miles) {
 
         VehicleFilterSelected vehicleFilterSelected = new VehicleFilterSelected(dealerID);
         vehicleFilterSelected.setYears(years);
