@@ -67,7 +67,7 @@ apply plugin: "fi.evident.beanstalk"
 
 // beanstalk requires unique version number for each uploaded archive
 // SNAPSHOT will be replaced with 'yyyyMMdd.HHmms' label
-version = '0.3-SNAPSHOT'
+version = '0.5-SNAPSHOT'
 
 //shadowJar {
 //    archiveName = 'wantcars.jar'

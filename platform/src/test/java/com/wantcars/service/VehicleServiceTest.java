@@ -27,7 +27,7 @@ public class VehicleServiceTest {
     @Test
     public void queryAllWithoutList() {
         VehicleFilterSelected v = new VehicleFilterSelected("10130");
-        List<Vehicle> list = vehicleService.Query(v);
+        List<Vehicle> list = vehicleService.query(v);
         assertEquals(20, list.size());
     }
 
@@ -35,7 +35,7 @@ public class VehicleServiceTest {
     public void queryAllWithZeroSizeList() {
         VehicleFilterSelected v = new VehicleFilterSelected("10130");
         v.setYears(new ArrayList<String>());
-        List<Vehicle> list = vehicleService.Query(v);
+        List<Vehicle> list = vehicleService.query(v);
         assertEquals(20, list.size());
     }
 
@@ -45,7 +45,7 @@ public class VehicleServiceTest {
         List<String> years = new ArrayList<String>();
         years.add("2015");
         v.setYears(years);
-        List<Vehicle> list = vehicleService.Query(v);
+        List<Vehicle> list = vehicleService.query(v);
         assertEquals(20, list.size());
         assertThat(list, hasItem(allOf(
                 hasProperty("year", is("2015"))
@@ -58,7 +58,7 @@ public class VehicleServiceTest {
         List<String> years = new ArrayList<String>();
         years.add("2016");
         v.setYears(years);
-        List<Vehicle> list = vehicleService.Query(v);
+        List<Vehicle> list = vehicleService.query(v);
         assertEquals(50, list.size());
         assertThat(list, hasItem(allOf(hasProperty("year", is("2016")))));
     }
