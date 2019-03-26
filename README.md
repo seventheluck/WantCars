@@ -2,7 +2,11 @@
 Visit link [Website: http://wantcars-front.s3-website-us-west-2.amazonaws.com/dealer/](http://wantcars-front.s3-website-us-west-2.amazonaws.com/dealer/)
 ## Overview
 
-![](https://github.com/seventheluck/seventheluck.github.io/raw/master/images/my_posts/wantcars/dealer.png)
+![](https://github.com/seventheluck/seventheluck.github.io/raw/master/images/my_posts/wantcars/wantcars-dealer01.png)
+![](https://github.com/seventheluck/seventheluck.github.io/raw/master/images/my_posts/wantcars/wantcars-dealer02.png)
+![](https://github.com/seventheluck/seventheluck.github.io/raw/master/images/my_posts/wantcars/wantcars-vehicle01.png)
+
+
 ### WantCars Automotive Classified Platform -- vehicle query, compare, dealer query platform.
 - Implemented RESTful APIs by Spring Boot following MVC architectural pattern
 - Used Gradle to build, automate and deliver backend application

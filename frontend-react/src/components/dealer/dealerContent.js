@@ -52,17 +52,12 @@ class DealerContent extends React.Component {
         displayDealerRecords(res) {
             const data = res.list;
             this.setState({totalNumber: this.totalRecordsToPageNumbers(res.totalNumber)});
-            window.navigator.geolocation.getCurrentPosition(
-                success => {
-                    let array = [];
-                    for(let i = 0; i < data.length; i++) {
-                        const dealer = data[i];
-                        array.push(<DealerRecord key={dealer.id} id={dealer.id} dealerName={dealer.name} address={dealer.address.address1} />);
-                    }
-                    this.setState({array: array});
-                }
-            );
-            
+            let array = [];
+            for(let i = 0; i < data.length; i++) {
+                const dealer = data[i];
+                array.push(<DealerRecord key={dealer.id} id={dealer.id} dealerName={dealer.name} address={dealer.address.address1} />);
+            }       
+            this.setState({array: array});
         }
 
 
