@@ -2,6 +2,7 @@ package com.wantcars.controller;
 
 import com.wantcars.entity.Vehicle;
 import com.wantcars.entity.VehicleFilterSelected;
+import com.wantcars.entity.VehicleResponse;
 import com.wantcars.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,7 +20,7 @@ public class VehicleController {
 
     @CrossOrigin(origins = {"http://wantcars-front.s3-website-us-west-2.amazonaws.com", "http://localhost:3000"})
     @GetMapping("/vehicle")
-    public List<Vehicle> queryVehicleList(@RequestParam String dealerID,
+    public VehicleResponse queryVehicleList(@RequestParam String dealerID,
                                           @RequestParam(required = false) List<String> years,
                                           @RequestParam(required = false) List<String> brand,
                                           @RequestParam(required = false) List<String> model,
@@ -43,6 +44,8 @@ public class VehicleController {
         vehicleFilterSelected.setBodyType(bodyType);
         vehicleFilterSelected.setMiles(miles);
         List<Vehicle> result = vehicleService.query(vehicleFilterSelected);
-        return result;
+        int totalNumber = vehicleService.queryTotalNumbers(vehicleFilterSelected);
+        VehicleResponse vr = new VehicleResponse(result, totalNumber);
+        return vr;
     }
 }

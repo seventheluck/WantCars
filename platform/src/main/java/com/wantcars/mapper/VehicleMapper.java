@@ -73,7 +73,7 @@ public interface VehicleMapper {
     public List<Vehicle> queryAll(VehicleFilterSelected p);
 
     @Select({"<script>",
-            "Select count(*)" +
+            "Select count(*) from vehicle " +
                     "where dealerID =#{dealerID}" +
                     "<when test='years != null and years.size() != 0'>" +
                     "and year in " +
@@ -128,10 +128,8 @@ public interface VehicleMapper {
                     "<foreach item='item' index='index' collection='bodyType' open='(' separator=',' close=')'>" +
                     "#{item}" +
                     "</foreach>" +
-                    "</when>" +
-                    "limit #{pageNumber}, #{pageSize}",
+                    "</when>",
             "</script>"})
-
     public int queryTotalNumbers(VehicleFilterSelected p);
 
     @Select({"<script>",

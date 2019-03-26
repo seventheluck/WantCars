@@ -1,5 +1,7 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import { selectedDealer } from '../../actions';
+import { Link } from "react-router-dom";
 class DealerRecord extends React.Component {
     constructor(props) {
         super(props);
@@ -10,9 +12,12 @@ class DealerRecord extends React.Component {
         }
     }
     searchVehicle = dealerID => {
-        console.log(this.state.id);
+        //console.log(this.state.id);
     }
     render() {
+        console.log('dealerRecord props start: ');
+        console.log(this.props);
+        console.log('dealerRecord props end: ');
         return (
             <div className="ui segment">
                     <div className="ui two column very relaxed grid">
@@ -22,36 +27,38 @@ class DealerRecord extends React.Component {
                             </div>
                         </div>
                         <div className="column">
-                            <div className="dealer-info">
-                                <button className="ui button" onClick={this.searchVehicle}>{this.state.dealerName}</button>
-                                <input type="hidden"  value="id"/>
+                            <div>
+                                <h2 className="ui">{this.state.dealerName}</h2>
                                 <p>Address: {this.state.address}</p>
+                            </div>
+                            <div>
+                            <Link to={{pathname : "/vehicle", state: { id : this.state.id}}} >
+                                <button className="fluid red ui button" 
+                                    onClick={() => this.props.selectedDealer(this.state.id)}>
+                                    Check Inventory
+                                </button>
+                            </Link>
+                                
+                                {/* <Link to="/vehicle">
+                                    Check Inventory
+                                </Link> */}
                             </div>
                         </div>
                     </div>
             </div>
         );
-        // return (
-            
-        //         <div className="item">
-        //             <div className="image">
-        //             <img src="./resources/dealer.jpg" alt="Dealer" />
-        //             </div>
-        //             <div className="content">
-        //                 <button className="header">Header</button>
-        //                 <div className="meta">
-        //                     <span>Description</span>
-        //                 </div>
-        //                 <div className="description">
-        //                     <p></p>
-        //                 </div>
-        //                 <div className="extra">
-        //                     Additional Details
-        //                 </div>
-        //             </div>
-        //         </div>
-        // );
     }
 };
+// this.props = {dealer: state.dealer};
+const mapStateToProps = (state) => {
+    console.log('dealerRecord mapStateToProps state start: ');
+    console.log(state);
+    console.log('dealerRecord mapStateToProps state end: ');
+    return {dealer: state.selectedDealer};
+}
 
-export default DealerRecord;
+export default connect(mapStateToProps,
+        { 
+            selectedDealer
+        }
+    )(DealerRecord);

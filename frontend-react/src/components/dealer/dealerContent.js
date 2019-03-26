@@ -2,7 +2,8 @@ import React from 'react';
 import DealerQueryPanel from './dealerQueryPanel';
 import DealerRecord from './dealerRecord';
 import '../../css/components.css';
-import wantcarsapi from '../api/wantcarsapi';
+import wantcarsapi from '../../api/wantcarsapi';
+import Pagination from '../pagination/pagination';
 
 class DealerContent extends React.Component {
     state = {
@@ -11,22 +12,26 @@ class DealerContent extends React.Component {
     }
 
     componentDidMount() {
-        this.search('','');
+        this.search('','', 1, 20);
     }
 
     show = (err) => {
         this.setState({errorMessage: err.message})
     }
-        // avliding this is undefined error, use arrow function!
-        search = (dealerName, city) => {
+        // avoiding this is undefined error, use arrow function!
+        search = (dealerName, city, pageNumber, pageSize) => {
+            this.setState({currentPageNumber: pageNumber,
+                dealerName: dealerName,
+                city: city
+            });
             wantcarsapi.get('/dealer/',
                 {
                     params: {
                                 name: dealerName,
                                 location: city,
                                 postCode: '98006',
-                                limit: 0,
-                                pageSize: 20
+                                limit: pageNumber - 1,
+                                pageSize: pageSize
                             }
                 }
             ).then(
@@ -34,7 +39,19 @@ class DealerContent extends React.Component {
                 err => this.show(err)
             )
         }
-        displayDealerRecords(data) {
+
+        totalRecordsToPageNumbers = (totalRecords) => {
+            const pageSize = 20;
+            if(totalRecords % pageSize === 0) {
+                return parseInt(totalRecords / pageSize);
+            } else {
+                return parseInt(totalRecords / pageSize) + 1;
+            }
+        }
+
+        displayDealerRecords(res) {
+            const data = res.list;
+            this.setState({totalNumber: this.totalRecordsToPageNumbers(res.totalNumber)});
             window.navigator.geolocation.getCurrentPosition(
                 success => {
                     let array = [];
@@ -47,6 +64,9 @@ class DealerContent extends React.Component {
             );
             
         }
+
+
+
     render() {
         if(!this.state.array && !this.state.errorMessage) {
             return (
@@ -103,23 +123,7 @@ class DealerContent extends React.Component {
                         <div className="list">
                             {this.state.array}
                         </div>
-                    </div>
-                    <div className="ui pagination menu">
-                        <a className="active item">
-                            1
-                        </a>
-                        <div className="disabled item">
-                            ...
-                        </div>
-                        <a className="item">
-                            10
-                        </a>
-                        <a className="item">
-                            11
-                        </a>
-                        <a className="item">
-                            12
-                        </a>
+                        <Pagination queryType="dealer" totalNumber={this.state.totalNumber} currentNumber={this.state.currentPageNumber} dealerName={this.state.dealerName} city={this.state.city} onSubmit={this.search} />
                     </div>
                 </div>
             );

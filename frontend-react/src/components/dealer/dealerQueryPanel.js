@@ -11,7 +11,7 @@ class DealerQueryPanel extends React.Component {
     
     onSearchSubmit = event => {
         event.preventDefault();
-        this.props.onSubmit(this.state.dealerName, this.state.city);
+        this.props.onSubmit(this.state.dealerName, this.state.city, 1, 20);
     }
     render() {
         return (

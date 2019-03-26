@@ -7,10 +7,9 @@ class VehicleRecord extends React.Component {
     }
 
     render() {
-        console.log(this.props.vehicles);
         return (
                 <div className="ui items">
-                    {this.display(this.state.vehicles)}
+                    {this.display(this.props.vehicles)}
                 </div>
         );
     }
