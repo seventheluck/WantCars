@@ -1,5 +1,5 @@
 # WantCars
-Visit link [Website: http://wantcars-front.s3-website-us-west-2.amazonaws.com/dealer/](http://wantcars-front.s3-website-us-west-2.amazonaws.com/dealer/)
+
 ## Overview
 
 ### Query Dealer by name and city
@@ -13,8 +13,9 @@ Visit link [Website: http://wantcars-front.s3-website-us-west-2.amazonaws.com/de
 
 
 ### WantCars Automotive Classified Platform -- vehicle query, compare, dealer query platform.
-- Implemented RESTful APIs by Spring Boot following MVC architectural pattern
-- Used Gradle to build, automate and deliver backend application
-- Utilized JDBC access to DynamoDB to manage dealers, vehicles, and users data
-- Developed dynamic website, used Javascript and DOM to perform multiple tasks
-- Created desktop application for vehicle inventory management using Java Swing Libraries
+- Designed automotive classified website, developed dynamic website based on React. Implemented page navigation with React-Router, used state management library Redux, with HTML, CSS, and Javascript
+- Achieved spatial indexing by S2-Geometry, build a fast and flexible worldwide geographic based application
+- Implemented RESTful APIs by Spring Boot with Java, accomplished efficient categories filter panel for customers
+- Utilized MyBatis persistence framework integrated with Spring Boot, following natural Object-oriented idioms
+- Used Gradle to build, automate and deliver backend application, deployed to test and production environment automatically, improved development efficiencies. Deployed frond-end website on AWS S3, back-end application on AWS Elastic Beanstalk
+- Wrote unit tests cover all requirements/functionality, Tested web services with unit tests by JUnit
