@@ -2,8 +2,13 @@
 Visit link [Website: http://wantcars-front.s3-website-us-west-2.amazonaws.com/dealer/](http://wantcars-front.s3-website-us-west-2.amazonaws.com/dealer/)
 ## Overview
 
+### Query Dealer by name and city
 ![](https://github.com/seventheluck/seventheluck.github.io/raw/master/images/my_posts/wantcars/wantcars-dealer01.png)
-![](https://github.com/seventheluck/seventheluck.github.io/raw/master/images/my_posts/wantcars/wantcars-dealer02.png)
+
+### Dealer List
+![](https://github.com/seventheluck/seventheluck.github.io/raw/master/images/my_posts/wantcars/wantcars-dealer03.png)
+
+# Query Vehicles
 ![](https://github.com/seventheluck/seventheluck.github.io/raw/master/images/my_posts/wantcars/wantcars-vehicle01.png)
 
 
