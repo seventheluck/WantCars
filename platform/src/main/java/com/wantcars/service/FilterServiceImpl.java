@@ -1,6 +1,5 @@
 package com.wantcars.service;
 
-import com.wantcars.dao.VehicleManager;
 import com.wantcars.entity.VehicleFilterContent;
 import com.wantcars.entity.VehicleFilterSelected;
 import com.wantcars.mapper.FilterMapper;
