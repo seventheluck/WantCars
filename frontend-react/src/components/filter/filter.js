@@ -100,10 +100,6 @@ class Filter extends React.Component {
 
 // this.props = {dealer: state.dealer};
 const mapStateToProps = (state) => {
-    console.log("1");
-    console.log('dealerRecord mapStateToProps state start: ');
-    console.log(state);
-    console.log('dealerRecord mapStateToProps state end: ');
     return {id: state.selectedDealer};
 }
 

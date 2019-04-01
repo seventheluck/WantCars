@@ -12,7 +12,16 @@ const selectedDealerReducer = (selectedDealer=null, action) => {
     return selectedDealer;
 };
 
+const searchDealerReducer = (dealer={list : [], totalNumber : 0}, action) => {
+    if(action.type === 'SEARCH_DEALER') {
+        return action.payload;
+    }
+
+    return dealer;
+}
+
 export default combineReducers({
     dealer: dealerReducer,
-    selectedDealer: selectedDealerReducer
+    selectedDealer: selectedDealerReducer,
+    searchDealer : searchDealerReducer
 });
