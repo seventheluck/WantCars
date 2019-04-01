@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { searchDealerAction } from '../../actions';
+import { searchDealerAction, inputDealerSearchInfoAction } from '../../actions';
 
 class DealerQueryPanel extends React.Component {
     
@@ -11,6 +11,7 @@ class DealerQueryPanel extends React.Component {
     
     onSearchSubmit = event => {
         event.preventDefault();
+        this.props.inputDealerSearchInfoAction(this.state.dealerName, this.state.city, '98006', 1, 20);
         this.props.searchDealerAction(this.state.dealerName, this.state.city, '98006', 1, 20);
     }
     render() {
@@ -40,7 +41,8 @@ class DealerQueryPanel extends React.Component {
 };
 
 const mapDispatchToProps = {
-    searchDealerAction
+    searchDealerAction,
+    inputDealerSearchInfoAction
 }
 
 export default connect(null, mapDispatchToProps)(DealerQueryPanel);

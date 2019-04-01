@@ -21,7 +21,20 @@ export const searchDealerAction = (dealerName, city, postCode, pageNumber, pageS
                 }
             ).then(
                 res => dispatch({ type: 'SEARCH_DEALER', payload: res.data }),
-                err => dispatch({ type: 'SEARCH_DEALER_FETCH_DATA_ERROR', payload: err})
+                err => dispatch({ type: 'SEARCH_DEALER_FETCH_DATA_ERROR', payload: err.message})
             )
+    }
+}
+
+export const inputDealerSearchInfoAction = (dealerName, city, postCode, pageNumber, pageSize) => {
+    return {
+        type: 'INPUT_DEALER_SEARCH_INFO',
+        payload: { 
+            dealerName : dealerName,
+            city : city,
+            postCode : postCode,
+            pageNumber : pageNumber,
+            pageSize : pageSize
+        }
     }
 }

@@ -8,7 +8,7 @@ class DealerList extends React.Component {
     //     list : this.props.list
     // }
     displayDealerRecords(list) {
-        if(list === undefined) {
+        if(list === null) {
             return (
                     <div className="ui segment">
                         <div className="ui active inverted dimmer">
@@ -33,13 +33,33 @@ class DealerList extends React.Component {
             );
         }
     }
-
+    displaySearchDealerError(errorMessage) {
+        return (
+            <div class="ui negative message">
+                <i class="close icon"></i>
+                <div class="header">
+                    We're sorry: {errorMessage}
+                </div>
+                <p>
+                    You can have a try minutes later!
+                </p>
+            </div>
+        );
+    }
     render() {
-        return this.displayDealerRecords(this.props.dealerList);
+        if(this.props.searchDealerError !== null) {
+            return this.displaySearchDealerError(this.props.searchDealerError);
+        } else {
+            return this.displayDealerRecords(this.props.dealerList);
+        }
+        
     }
 }
 
 const mapStateToProps =  (state) => {
-    return { dealerList : state.searchDealer.list }
+    return { 
+        dealerList : state.searchDealer.list,
+        searchDealerError : state.searchDealerError  
+    }
 }
 export default connect(mapStateToProps)(DealerList);
