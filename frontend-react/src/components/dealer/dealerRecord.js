@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectedDealer } from '../../actions';
+import { selectDealer } from '../../actions';
 import { Link } from "react-router-dom";
 class DealerRecord extends React.Component {
     constructor(props) {
@@ -34,7 +34,8 @@ class DealerRecord extends React.Component {
                             <div>
                             <Link to={{pathname : "/vehicle", state: { id : this.state.id}}} >
                                 <button className="fluid red ui button" 
-                                    onClick={() => this.props.selectedDealer(this.state.id)}>
+                                // create an action of selectedDealer
+                                    onClick={() => this.props.selectDealer(this.state.id)}>
                                     Check Inventory
                                 </button>
                             </Link>
@@ -51,14 +52,11 @@ class DealerRecord extends React.Component {
 };
 // this.props = {dealer: state.dealer};
 const mapStateToProps = (state) => {
-    console.log('dealerRecord mapStateToProps state start: ');
-    console.log(state);
-    console.log('dealerRecord mapStateToProps state end: ');
     return {dealer: state.selectedDealer};
 }
 
-export default connect(mapStateToProps,
-        { 
-            selectedDealer
-        }
-    )(DealerRecord);
+const mapDispatchToProps = { 
+    selectDealer
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(DealerRecord);
