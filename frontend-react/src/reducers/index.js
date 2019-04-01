@@ -12,7 +12,7 @@ const selectedDealerReducer = (selectedDealer=null, action) => {
     return selectedDealer;
 };
 
-const searchDealerReducer = (dealer={list : [], totalNumber : 0}, action) => {
+const searchDealerReducer = (dealer={list : undefined, totalNumber : 0}, action) => {
     if(action.type === 'SEARCH_DEALER') {
         return action.payload;
     }

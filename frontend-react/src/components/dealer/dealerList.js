@@ -8,7 +8,6 @@ class DealerList extends React.Component {
     //     list : this.props.list
     // }
     displayDealerRecords(list) {
-        console.log(list);
         if(list === undefined) {
             return (
                     <div className="ui segment">
@@ -27,17 +26,16 @@ class DealerList extends React.Component {
                 const dealer = data[i];
                 array.push(<DealerRecord key={dealer.id} id={dealer.id} dealerName={dealer.name} address={dealer.address.address1} />);
             }       
-            return array;
+            return (
+                <div className="list">
+                    {array}
+                </div>
+            );
         }
     }
 
     render() {
-        return (
-            <div className="list">
-            
-                {this.displayDealerRecords(this.props.dealerList)}
-            </div>
-        );
+        return this.displayDealerRecords(this.props.dealerList);
     }
 }
 
