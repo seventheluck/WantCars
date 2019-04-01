@@ -1,10 +1,8 @@
 import React from 'react';
 import DealerQueryPanel from './dealerQueryPanel';
 import DealerList from './dealerList';
-import DealerRecord from './dealerRecord';
 import '../../css/components.css';
-import { searchDealerAction } from '../../actions';
-import wantcarsapi from '../../api/wantcarsapi';
+import { searchDealerAction, inputDealerSearchInfoAction } from '../../actions';
 import Pagination from '../pagination/pagination';
 import { connect } from 'react-redux';
 
@@ -15,12 +13,11 @@ class DealerContent extends React.Component {
     }
 
     componentDidMount() {
+        this.props.inputDealerSearchInfoAction('', '', '98006', 1, 20);
         this.props.searchDealerAction('', '', '98006', 1, 20);
     }
 
-    show = (err) => {
-        this.setState({errorMessage: err.message})
-    }
+    
 
         totalRecordsToPageNumbers = (totalRecords) => {
             const pageSize = 20;
@@ -44,11 +41,11 @@ class DealerContent extends React.Component {
                     <DealerQueryPanel onSubmit={this.search}/>
                     <div className="ui segment">
                         <DealerList />
-                        <Pagination queryType="dealer" totalNumber={this.state.totalNumber} currentNumber={this.state.currentPageNumber} dealerName={this.state.dealerName} city={this.state.city} onSubmit={this.search} />
+                        <Pagination queryType="dealer"/>
                     </div>
                 </div>
             );
         }   
 };
 
-export default connect(null, { searchDealerAction })(DealerContent);
+export default connect(null, { searchDealerAction,  inputDealerSearchInfoAction})(DealerContent);

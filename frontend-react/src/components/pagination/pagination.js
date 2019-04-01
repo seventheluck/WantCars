@@ -1,18 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { searchDealerAction, inputDealerSearchInfoAction } from '../../actions';
 
 class Pagination extends React.Component {
-    state = {
-        currentPageNumber: this.props.currentNumber,
-        totalPageNumber: this.props.totalNumber,
-        dealerName: this.props.dealerName,
-        city: this.props.city
-    }
 
-    onClickPageNumber = (dealerName, city, index, type) => {
-        if(type === 'dealer') {
-            this.props.onSubmit(dealerName, city,index, 20);
-        } else if (type === 'vehicle') {
+    onClickPageNumber = (index) => {
+        if(this.props.queryType === 'dealer') {
+            this.props.searchDealerAction(this.props.dealerName, this.props.city, this.props.postCode, index, this.props.pageSize);
+            this.props.inputDealerSearchInfoAction(this.props.dealerName, this.props.city, this.props.postCode, index, this.props.pageSize);
+        } else if (this.props.queryType === 'vehicle') {
             this.props.onSubmit(index);
+        } else {
+
         }
             
     }
@@ -20,7 +19,7 @@ class Pagination extends React.Component {
     pageItem = (index) => {
         return (
             // onClick={this.props.onSubmit('','',index, 20)}  is wrong!
-            <a key={index} className={index === this.props.currentNumber ? "active item" : "item"} onClick={ () => this.onClickPageNumber(this.props.dealerName, this.props.city, index, this.props.queryType)} > 
+            <a key={index} className={index === this.props.pageNumber ? "active item" : "item"} onClick={ () => this.onClickPageNumber(index)} > 
                 {index}
             </a>
         );
@@ -34,9 +33,18 @@ class Pagination extends React.Component {
         );
     }
 
+    totalRecordsToPageNumbers = (totalRecords) => {
+        const pageSize = 20;
+        if(totalRecords % pageSize === 0) {
+            return parseInt(totalRecords / pageSize);
+        } else {
+            return parseInt(totalRecords / pageSize) + 1;
+        }
+    }
+
     render() {
-        const totalNumber = this.props.totalNumber;
-        const currentNumber = this.props.currentNumber;
+        const totalNumber = this.totalRecordsToPageNumbers(this.props.totalNumber);
+        const currentNumber = this.props.pageNumber;
         const pageContent = [];
 
         if(totalNumber <= 16) {
@@ -82,4 +90,32 @@ class Pagination extends React.Component {
     }
 }
 
-export default Pagination;
+const mapStateToProps = (state) => {
+    if(state.inputDealerSearchInfo === null) {
+        return {
+            dealerName : '',
+            city : '',
+            postCode : '',
+            pageNumber : 1,
+            pageSize : 20,
+            totalNumber : 0           
+        }
+    } else {
+        return { 
+            dealerName : state.inputDealerSearchInfo.dealerName,
+            city : state.inputDealerSearchInfo.city,
+            postCode : state.inputDealerSearchInfo.postCode,
+            pageNumber : state.inputDealerSearchInfo.pageNumber,
+            pageSize : state.inputDealerSearchInfo.pageSize,
+            // total records number, not total page number
+            totalNumber : state.searchDealer.totalNumber
+         };
+    }
+}
+
+const mapDispatchToProps = {
+    searchDealerAction,
+    inputDealerSearchInfoAction
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Pagination);
