@@ -1,24 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { searchDealerAction, inputDealerSearchInfoAction } from '../../actions';
+import { searchDealerAction, inputDealerSearchInfoAction, searchVehicleAction } from '../../actions';
 
 class Pagination extends React.Component {
+    state = {
+        vehiclePageNumber : 1
+    }
 
     onClickPageNumber = (index) => {
         if(this.props.queryType === 'dealer') {
             this.props.searchDealerAction(this.props.dealerName, this.props.city, this.props.postCode, index, this.props.pageSize);
             this.props.inputDealerSearchInfoAction(this.props.dealerName, this.props.city, this.props.postCode, index, this.props.pageSize);
         } else if (this.props.queryType === 'vehicle') {
-            this.props.onSubmit(index);
+            const dealerId = { dealerID : this.props.id };
+            const newParam = Object.assign(dealerId, this.props.param);
+            this.setState( { vehiclePageNumber : index });
+            this.props.searchVehicleAction(newParam, undefined, index);
         } else {
 
-        }
-            
+        } 
     }
 
     pageItem = (index) => {
         return (
-            // onClick={this.props.onSubmit('','',index, 20)}  is wrong!
             <a key={index} className={index === this.props.pageNumber ? "active item" : "item"} onClick={ () => this.onClickPageNumber(index)} > 
                 {index}
             </a>
@@ -33,7 +37,8 @@ class Pagination extends React.Component {
         );
     }
 
-    totalRecordsToPageNumbers = (totalRecords) => {
+    totalRecordsToPageNumbers = (dealerTotalNumber, vehicleTotalNumber) => {
+        const totalRecords = this.props.queryType === 'dealer' ? dealerTotalNumber : vehicleTotalNumber;
         const pageSize = 20;
         if(totalRecords % pageSize === 0) {
             return parseInt(totalRecords / pageSize);
@@ -43,8 +48,8 @@ class Pagination extends React.Component {
     }
 
     render() {
-        const totalNumber = this.totalRecordsToPageNumbers(this.props.totalNumber);
-        const currentNumber = this.props.pageNumber;
+        const totalNumber = this.totalRecordsToPageNumbers(this.props.dealerTotalNumber, this.props.vehicleTotalNumber);
+        const currentNumber = this.props.queryType === 'dealer' ? this.props.dealerPageNumber : this.state.vehiclePageNumber;
         const pageContent = [];
 
         if(totalNumber <= 16) {
@@ -93,29 +98,38 @@ class Pagination extends React.Component {
 const mapStateToProps = (state) => {
     if(state.inputDealerSearchInfo === null) {
         return {
+            id : state.selectedDealer,
             dealerName : '',
             city : '',
             postCode : '',
-            pageNumber : 1,
+            vehiclePageNumber : 1,
+            dealerPageNumber : 1,
             pageSize : 20,
-            totalNumber : 0           
+            dealerTotalNumber : 0,
+            vehicleTotalNumber : 0,
+            param : {}
         }
     } else {
         return { 
+            id : state.selectedDealer,
             dealerName : state.inputDealerSearchInfo.dealerName,
             city : state.inputDealerSearchInfo.city,
             postCode : state.inputDealerSearchInfo.postCode,
-            pageNumber : state.inputDealerSearchInfo.pageNumber,
+            vehiclePageNumber : 1,
+            dealerPageNumber : state.inputDealerSearchInfo.pageNumber,
             pageSize : state.inputDealerSearchInfo.pageSize,
             // total records number, not total page number
-            totalNumber : state.searchDealer.totalNumber
+            dealerTotalNumber : state.searchDealer.totalNumber,
+            vehicleTotalNumber : state.vehicleResponse.totalNumber,
+            param : state.checkBoxParam
          };
     }
 }
 
 const mapDispatchToProps = {
     searchDealerAction,
-    inputDealerSearchInfoAction
+    inputDealerSearchInfoAction,
+    searchVehicleAction
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pagination);

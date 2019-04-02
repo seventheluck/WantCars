@@ -11,7 +11,6 @@ class Filter extends React.Component {
             this.props.searchVehicleFilterAction(param);
             this.props.searchVehicleAction(param);
         }
-        this.selectedCheckboxes = new Set();
     }
 
     displayError = (message) => {
@@ -91,7 +90,7 @@ class Filter extends React.Component {
 
 // this.props = {dealer: state.dealer};
 const mapStateToProps = (state) => {
-    return {id: state.selectedDealer, filterObject : state.vehicleFilterResponse};
+    return {id: state.selectedDealer, filterObject : state.vehicleFilterResponse, checkBoxParam : state.checkBoxParam};
 }
 
 const mapDispatchToProps = {
