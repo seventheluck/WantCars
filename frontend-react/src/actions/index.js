@@ -1,5 +1,5 @@
 import wantcarsapi from '../api/wantcarsapi';
-
+import qs from 'qs';
 export const selectDealer = (id) => {
     return {
         type: 'DEALER_SELECTED',
@@ -49,7 +49,10 @@ export const searchVehicleAction = ( param,
         param.pageNumber = pageNumber - 1;
         wantcarsapi.get('/vehicle/',
         {
-            params: param
+            params: param,
+            paramsSerializer: function(params) {
+                return qs.stringify(params, {arrayFormat: 'comma'});
+            }
         }
         ).then(
             res => dispatch({ type: 'SEARCH_VEHICLE', payload : res.data }),
@@ -62,10 +65,22 @@ export const searchVehicleFilterAction = ( param
     ) => {
        return function(dispatch) {
             wantcarsapi.get('/filter/',
-            { params : param }
+            { 
+                params : param,
+                paramsSerializer: function(params) {
+                    return qs.stringify(params, {arrayFormat: 'comma'});
+                }   
+            }
             ).then(
                 res => dispatch({ type: 'SEARCH_VEHICLE_FILTER', payload : res.data }),
                 err => dispatch({ type: 'FETCH_DATA_ERROR', payload : err.message})
             );
        }
+}
+
+export const checkBoxAction = (checkBoxValue) => {
+    return {
+        type: 'CHECK_BOX_CHANGED',
+        payload: checkBoxValue
+    }
 }
