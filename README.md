@@ -1,7 +1,8 @@
 # WantCars
 
-- Deleted older versions of frontend without react.
-- Developing filter module and code refactor...
+- Deleted older versions of frontend without react => finished
+- Developing filter module and code refactor => finished
+- Fix filter bbugs => developing...
 ## Overview
 
 ### Query Dealer by name and city
