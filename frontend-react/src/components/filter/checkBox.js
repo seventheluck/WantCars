@@ -25,7 +25,7 @@ class CheckBox extends React.Component {
             }
         }
         this.props.checkBoxAction(result);
-        this.setState({ checked : !this.state.checked });  
+        this.setState({ checked : !this.state.checked });
         const dealerId = { dealerID : this.props.id };
         const param = Object.assign(dealerId, result);
         this.props.searchVehicleFilterAction(param);
@@ -34,12 +34,13 @@ class CheckBox extends React.Component {
 
     render() {
         const key = this.props.name + '_' + this.props.item;
+        const item = this.props.name === 'isNew' ? ( this.props.item === '1' ? 'New' : 'Used') : this.props.item;
         return(
             <div key={key} className="item">
                         <div className="ui checkbox">
-                                <input type="checkbox" name="{item} " onChange={() => this.toggleCheckbox(this.props.name, this.props.item)} />
+                                <input type="checkbox" name={item} onChange={() => this.toggleCheckbox(this.props.name, this.props.item)} />
                                 <label>
-                                    <h4 className="ui grey inverted header">{this.props.item}</h4>
+                                    <h4 className="ui grey inverted header">{item}</h4>
                                 </label>
                         </div>
             </div>
@@ -48,7 +49,7 @@ class CheckBox extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return { id : state.selectedDealer, checkedBoxParam : state.checkBoxParam };
+    return { id : state.selectedDealer, checkBoxParam : state.checkBoxParam };
 }
 
 const mapDispatchToProps = {
