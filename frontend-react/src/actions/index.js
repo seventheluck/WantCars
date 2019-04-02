@@ -21,7 +21,7 @@ export const searchDealerAction = (dealerName, city, postCode, pageNumber, pageS
                 }
             ).then(
                 res => dispatch({ type: 'SEARCH_DEALER', payload: res.data }),
-                err => dispatch({ type: 'SEARCH_DEALER_FETCH_DATA_ERROR', payload: err.message})
+                err => dispatch({ type: 'FETCH_DATA_ERROR', payload: err.message})
             )
     }
 }
@@ -37,4 +37,35 @@ export const inputDealerSearchInfoAction = (dealerName, city, postCode, pageNumb
             pageSize : pageSize
         }
     }
+}
+
+
+export const searchVehicleAction = ( param,
+        pageSize=20,
+        pageNumber=1
+    ) => {
+    return function(dispatch) {
+        param.pageSize = pageSize;
+        param.pageNumber = pageNumber - 1;
+        wantcarsapi.get('/vehicle/',
+        {
+            params: param
+        }
+        ).then(
+            res => dispatch({ type: 'SEARCH_VEHICLE', payload : res.data }),
+            err => dispatch({ type: 'FETCH_DATA_ERROR', payload : err.message})
+        );
+    }
+}
+
+export const searchVehicleFilterAction = ( param
+    ) => {
+       return function(dispatch) {
+            wantcarsapi.get('/filter/',
+            { params : param }
+            ).then(
+                res => dispatch({ type: 'SEARCH_VEHICLE_FILTER', payload : res.data }),
+                err => dispatch({ type: 'FETCH_DATA_ERROR', payload : err.message})
+            );
+       }
 }

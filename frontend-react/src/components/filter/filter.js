@@ -1,32 +1,15 @@
 import React from 'react';
-import wantcarsapi from '../../api/wantcarsapi';
+import { searchVehicleFilterAction, searchVehicleAction } from '../../actions';
 import { connect } from 'react-redux';
 
 class Filter extends React.Component {
 
-    state = {
-        id : this.props.id
-    }
-
     componentDidMount() {
-        wantcarsapi.get('/filter/',
-            { params : {
-                    dealerID: this.state.id,
-                    years: [],
-                    brand: [],
-                    model: [],
-                    isNew: [],
-                    price: [],
-                    exteriorColor: [],
-                    interiorColor: [],
-                    bodyType: [],
-                    miles: []
-                }
-            }
-        ).then(
-            success => (this.display(success.data)),
-            error => (this.displayError(error.message))
-        );
+        if(this.props.id !== null) {
+            const param = { dealerID : this.props.id };
+            this.props.searchVehicleFilterAction(param);
+            this.props.searchVehicleAction(param);
+        }
     }
 
     displayError = (message) => {
@@ -35,25 +18,30 @@ class Filter extends React.Component {
 
     display = (data) => {
         const blocks = [];
-        blocks.push(this.displayBlock('Year', data['years']));
-        blocks.push(this.displayBlock('Brand', data['brand']));
-        blocks.push(this.displayBlock('Model', data['model']));
-        blocks.push(this.displayBlock('Type', data['isNew']));
-        blocks.push(this.displayBlock('Price', data['price']));
-        blocks.push(this.displayBlock('Exterior Color', data['exteriorColor']));
-        blocks.push(this.displayBlock('Interior Color', data['interiorColor']));
-        blocks.push(this.displayBlock('Body Type', data['bodyType']));
-        blocks.push(this.displayBlock('Mile', data['miles']));
-        this.setState({
-            blocks : blocks
-        })
+
+        if(data !== null) {
+            blocks.push(this.displayBlock('Year', data['years']));
+            blocks.push(this.displayBlock('Brand', data['brand']));
+            blocks.push(this.displayBlock('Model', data['model']));
+            blocks.push(this.displayBlock('Type', data['isNew']));
+            blocks.push(this.displayBlock('Price', data['price']));
+            blocks.push(this.displayBlock('Exterior Color', data['exteriorColor']));
+            blocks.push(this.displayBlock('Interior Color', data['interiorColor']));
+            blocks.push(this.displayBlock('Body Type', data['bodyType']));
+            blocks.push(this.displayBlock('Mile', data['miles']));
+        }
+        
+        return blocks;
     }
 
     displayBlock = (name, items) => {
         const allItems = [];
-        items.map(
-            item => allItems.push(this.generateItems(name, item))
-        )
+        if(items !== null && items !== undefined) {
+            items.map(
+                item => allItems.push(this.generateItems(name, item))
+            )
+        }
+        
         return this.generateBlock(name, allItems);
     }
 
@@ -90,7 +78,7 @@ class Filter extends React.Component {
         return (
             <div className="ui vertical inverted sidebar menu left overlay visible ">
             <div className="item">
-                {this.state.blocks}
+                {this.display(this.props.filterObject)}
             </div>
             </div>
         );
@@ -100,7 +88,12 @@ class Filter extends React.Component {
 
 // this.props = {dealer: state.dealer};
 const mapStateToProps = (state) => {
-    return {id: state.selectedDealer};
+    return {id: state.selectedDealer, filterObject : state.vehicleFilterResponse};
 }
 
-export default connect(mapStateToProps)(Filter);
+const mapDispatchToProps = {
+    searchVehicleFilterAction,
+    searchVehicleAction
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);

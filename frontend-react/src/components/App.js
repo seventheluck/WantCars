@@ -2,8 +2,7 @@ import React from 'react';
 import VehicleContent from './vehicle/vehicleContent';
 import DealerContent from './dealer/dealerContent';
 import Filter from './filter/filter';
-import { selectDealer } from '../actions/';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 const Dealer = () => {
     return <DealerContent />;
