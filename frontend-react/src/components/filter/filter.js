@@ -1,6 +1,7 @@
 import React from 'react';
 import { searchVehicleFilterAction, searchVehicleAction } from '../../actions';
 import { connect } from 'react-redux';
+import CheckBox from './checkBox';
 
 class Filter extends React.Component {
 
@@ -10,6 +11,7 @@ class Filter extends React.Component {
             this.props.searchVehicleFilterAction(param);
             this.props.searchVehicleAction(param);
         }
+        this.selectedCheckboxes = new Set();
     }
 
     displayError = (message) => {
@@ -38,7 +40,7 @@ class Filter extends React.Component {
         const allItems = [];
         if(items !== null && items !== undefined) {
             items.map(
-                item => allItems.push(this.generateItems(name, item))
+                item => allItems.push(<CheckBox name={this.displayNameToRealName(name)} item={item}/>)
             )
         }
         
@@ -60,18 +62,19 @@ class Filter extends React.Component {
         );
     }
 
-    generateItems = (name, item) => {
-        const key = name + '_' + item;
-        return (
-            <div key={key} className="item">
-                        <div className="ui checkbox">
-                                <input type="checkbox" name="{item}" />
-                                <label>
-                                <h4 className="ui grey inverted header">{item}</h4>
-                                </label>
-                        </div>
-            </div>
-        );
+    displayNameToRealName = (displayname) => {
+        const names = {
+            'Year' :  'years',
+            'Brand' :  'brand',
+            'Model' :  'model',
+            'Type' :  'isNew',
+            'Price' :  'price',
+            'Exterior Color' : 'exteriorColor',
+            'Interior Color' :  'interiorColor',
+            'Body Type' :  'bodyType',
+            'Mile' :  'miles'
+        }
+        return names[displayname];
     }
 
     render() {

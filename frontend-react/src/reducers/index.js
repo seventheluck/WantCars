@@ -56,6 +56,14 @@ const searchVehicleFilterReducer = (vehicleFilterResponse={}, action) => {
     return vehicleFilterResponse;
 }
 
+const checkBoxReducer = (checkBoxParam={}, action) => {
+    if(action.type === 'CHECK_BOX_CHANGED') {
+        return action.payload;
+    }
+
+    return checkBoxParam;
+}
+
 export default combineReducers({
     dealer: dealerReducer,
     selectedDealer: selectedDealerReducer,
@@ -63,5 +71,6 @@ export default combineReducers({
     searchDealerError : searchDealerErrorReducer,
     inputDealerSearchInfo : inputDealerSearchInfoReducer,
     vehicleResponse : searchVehicleReducer,
-    vehicleFilterResponse : searchVehicleFilterReducer
+    vehicleFilterResponse : searchVehicleFilterReducer,
+    checkBoxParam: checkBoxReducer
 });
