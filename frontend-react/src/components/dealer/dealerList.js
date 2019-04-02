@@ -35,9 +35,9 @@ class DealerList extends React.Component {
     }
     displaySearchDealerError(errorMessage) {
         return (
-            <div class="ui negative message">
-                <i class="close icon"></i>
-                <div class="header">
+            <div className="ui negative message">
+                <i className="close icon"></i>
+                <div className="header">
                     We're sorry: {errorMessage}
                 </div>
                 <p>

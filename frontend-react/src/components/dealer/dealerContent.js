@@ -19,14 +19,7 @@ class DealerContent extends React.Component {
 
     
 
-        totalRecordsToPageNumbers = (totalRecords) => {
-            const pageSize = 20;
-            if(totalRecords % pageSize === 0) {
-                return parseInt(totalRecords / pageSize);
-            } else {
-                return parseInt(totalRecords / pageSize) + 1;
-            }
-        }
+        
 
     render() {
             return (

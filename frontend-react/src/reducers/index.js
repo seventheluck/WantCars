@@ -21,9 +21,11 @@ const searchDealerReducer = (dealer={list : null, totalNumber : 0}, action) => {
 }
 
 const searchDealerErrorReducer = (error=null, action) => {
-    if(action.type === 'SEARCH_DEALER_FETCH_DATA_ERROR') {
+    if(action.type === 'FETCH_DATA_ERROR') {
         return action.payload;
     } else if (action.type === 'SEARCH_DEALER') {
+        return null;
+    } else if (action.type === 'SEARCH_VEHICLE') {
         return null;
     }
 
@@ -38,10 +40,28 @@ const inputDealerSearchInfoReducer = (info=null, action) => {
     return info;
 }
 
+const searchVehicleReducer = (vehicleResponse={ list: null, totalNumber : 0}, action) => {
+    if(action.type === 'SEARCH_VEHICLE') {
+        return action.payload;
+    }
+
+    return vehicleResponse;
+}
+
+const searchVehicleFilterReducer = (vehicleFilterResponse={}, action) => {
+    if(action.type === 'SEARCH_VEHICLE_FILTER') {
+        return action.payload;
+    }
+
+    return vehicleFilterResponse;
+}
+
 export default combineReducers({
     dealer: dealerReducer,
     selectedDealer: selectedDealerReducer,
     searchDealer : searchDealerReducer,
     searchDealerError : searchDealerErrorReducer,
-    inputDealerSearchInfo : inputDealerSearchInfoReducer
+    inputDealerSearchInfo : inputDealerSearchInfoReducer,
+    vehicleResponse : searchVehicleReducer,
+    vehicleFilterResponse : searchVehicleFilterReducer
 });

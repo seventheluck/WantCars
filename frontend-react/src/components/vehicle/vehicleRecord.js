@@ -1,17 +1,9 @@
 import React from 'react';
 
 class VehicleRecord extends React.Component {
-    state = {
-        dealerID: this.props.id,
-        vehicles: this.props.vehicles,
-    }
-
+    
     render() {
-        return (
-                <div className="ui items">
-                    {this.display(this.props.vehicles)}
-                </div>
-        );
+        return this.vehicle(this.props.vehicle);
     }
 
     newOrUsed = (flag) => {
@@ -21,7 +13,6 @@ class VehicleRecord extends React.Component {
 
     vehicle= (vehicle) => {
         return (
-            
                 <div key={vehicle.id} className="ui raised very padded text container segment">
                 <div className="ui grid">
                 <div className="ten wide column">
@@ -53,14 +44,6 @@ class VehicleRecord extends React.Component {
                 </div>
             </div>
         );
-    }
-
-    display = (vehicles) => {
-        const vehicleRecords = [];
-        vehicles.map(
-            oneVehicle => vehicleRecords.push(this.vehicle(oneVehicle))
-        );
-        return vehicleRecords;
     }
 };
 
